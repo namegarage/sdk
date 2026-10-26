@@ -1,0 +1,50 @@
+{
+  "name": "namegarage-sdk",
+  "version": "0.1.0",
+  "description": "Compatibility alias for @namegarage/sdk, the official Namegarage public catalog client.",
+  "type": "module",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./index.d.cts",
+        "default": "./index.cjs"
+      }
+    }
+  },
+  "files": [
+    "index.js",
+    "index.cjs",
+    "index.d.ts",
+    "index.d.cts"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@namegarage/sdk": "0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namegarage/sdk.git",
+    "directory": "aliases/namegarage-sdk"
+  },
+  "homepage": "https://namegarage.com/docs/quickstart",
+  "bugs": {
+    "url": "https://github.com/namegarage/sdk/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "namegarage",
+    "sdk",
+    "compatibility"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

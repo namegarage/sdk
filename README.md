@@ -88,6 +88,13 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 
 [API documentation](https://namegarage.com/docs/) · [OpenAPI](https://namegarage.com/openapi.json) · [Source and issues](https://github.com/namegarage/sdk)
 
+## Compatibility package sources
+
+`aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
+packages pinned to the published `@namegarage/sdk@0.1.0`. New projects should use
+the scoped package. Run `npm run test:aliases` to check their archives, clean
+consumer installs, both module/type entry points and browser bundles.
+
 ## License
 
 MIT. Copyright 2026 Namegarage.
