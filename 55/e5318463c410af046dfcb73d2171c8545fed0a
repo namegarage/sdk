@@ -1,0 +1,58 @@
+scripts/verify-aliases.mjs
+  s_b5cbe84e1f7662::t_31b3e439897b21 1-55
+  s_b5cbe84e1f7662::t_5ee90982c7565b 56
+AGENTS.md
+  s_b5cbe84e1f7662::t_1a62692155e420 5
+README.md
+  s_b5cbe84e1f7662::t_c66307bf73d35e 91-97
+aliases/namegarage-sdk/LICENSE
+  s_b5cbe84e1f7662::t_2590f04a51fff8 1-21
+aliases/namegarage-sdk/README.md
+  s_b5cbe84e1f7662::t_7f6cd8fd541d35 1-20
+aliases/namegarage-sdk/index.cjs
+  s_b5cbe84e1f7662::t_d6f87e2bf51abb 1
+aliases/namegarage-sdk/index.d.cts
+  s_b5cbe84e1f7662::t_74f3ef8d1216e5 1
+aliases/namegarage-sdk/index.d.ts
+  s_b5cbe84e1f7662::t_448548abf57302 1
+aliases/namegarage-sdk/index.js
+  s_b5cbe84e1f7662::t_24deb561e1fe4e 1
+aliases/namegarage-sdk/package-lock.json
+  s_b5cbe84e1f7662::t_154b26b19f1107 1-22
+aliases/namegarage-sdk/package.json
+  s_b5cbe84e1f7662::t_6706721e333614 1-50
+aliases/namegarage/LICENSE
+  s_b5cbe84e1f7662::t_9be368fed3aa20 1-21
+aliases/namegarage/README.md
+  s_b5cbe84e1f7662::t_f38a385e0f7b19 1-20
+aliases/namegarage/index.cjs
+  s_b5cbe84e1f7662::t_61c5686c86cb5a 1
+aliases/namegarage/index.d.cts
+  s_b5cbe84e1f7662::t_e63cdd3a0e9b8c 1
+aliases/namegarage/index.d.ts
+  s_b5cbe84e1f7662::t_3788b0de232784 1
+aliases/namegarage/index.js
+  s_b5cbe84e1f7662::t_83a9d63387748e 1
+aliases/namegarage/package-lock.json
+  s_b5cbe84e1f7662::t_6ea00c638c23d2 1-22
+aliases/namegarage/package.json
+  s_b5cbe84e1f7662::t_ce3845a66271c5 1-50
+package.json
+  s_b5cbe84e1f7662::t_6116b1682ce8ae 29-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "55e5318463c410af046dfcb73d2171c8545fed0a",
+  "prompts": {},
+  "sessions": {
+    "s_b5cbe84e1f7662": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a170db-9f85-7200-bc5f-b075053301f0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
