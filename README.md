@@ -128,3 +128,15 @@ Search descriptions are sent to Namegarage; omit confidential project details.
 All methods support cancellation and the same timeout/refusal handling. The
 [developer changelog](https://namegarage.com/developers/changelog/) and bundled
 `release.json` record coordinated component versions.
+
+## A2A compatibility
+
+Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a)
+is a separate anonymous protocol adapter over the same public catalog search.
+This SDK keeps version 0.2.0 and its existing methods; it does not add an A2A
+transport or require authentication. Both compatibility packages keep their exact
+`@namegarage/sdk@0.2.0` dependency.
+
+The source `release.json` tracks the coordinated A2A release. Published npm
+archives and the immutable v0.2.0 tag retain the original catalog-parity metadata;
+they remain compatible and are reused without republishing their version.
