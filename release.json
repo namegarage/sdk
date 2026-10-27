@@ -1,10 +1,11 @@
 {
-  "id": "2026-10-27-catalog-parity",
+  "id": "2026-10-27-a2a-concierge",
   "components": {
-    "api": "1.1.0",
+    "api": "1.2.0",
     "mcp": "1.3.1",
     "sdk": "0.2.0",
-    "skill": "1.1.0"
+    "skill": "1.2.0",
+    "a2a": "1.0.0"
   },
   "capabilities": [
     {
@@ -33,10 +34,24 @@
     }
   ],
   "compatibility": {
-    "api": "Adds exact lookup, payment options and alternatives GET routes; existing search/catalog remain compatible.",
-    "mcp": "Retains MCP 1.3 published descriptions and potential uses while sharing its four read-only operations with HTTP; wire protocol unchanged.",
-    "sdk": "Adds typed lookup, payment-option and alternatives methods without changing existing catalog/search methods.",
-    "skill": "Documents the four public capabilities, interface selection, privacy and purchase handoff."
+    "api": "Adds the anonymous A2A adapter; existing catalog GET operations and schemas stay compatible.",
+    "mcp": "MCP 1.3.1 and its four existing tools keep their current contracts.",
+    "sdk": "SDK 0.2.0 and both exact aliases remain compatible and immutable. A2A is an independent transport; no SDK method changes. Source coordination metadata tracks this release while existing npm/tag bytes remain those published for catalog parity.",
+    "skill": "Skill 1.2.0 adds read-only A2A selection with anonymous MCP/HTTP fallbacks; MIT-0 remains unchanged.",
+    "a2a": "First application release, using the A2A 1.0 stateless JSON-RPC direct-Message profile."
   },
-  "skill_sha256": "0d2a6628e46fe15c156bdd29fe2171ebafbdc955cfb5ea0c407de2fcf42b10b7"
+  "skill_sha256": "b97307b2060bcf7e2e15682c16b4cadd1e00822df438c835ce30a4976e1e6b4c",
+  "adapters": [
+    {
+      "id": "a2a",
+      "component": "a2a",
+      "endpoint": "/api/a2a",
+      "card": "/.well-known/agent-card.json",
+      "protocol": "1.0",
+      "skill": "select_domains",
+      "uses": [
+        "search_domains"
+      ]
+    }
+  ]
 }
