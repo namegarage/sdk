@@ -40,3 +40,11 @@ test('validates alternatives options before fetching',()=>{
  for(const options of [{maxPrice:0},{maxPrice:1.5},{limit:0},{limit:51}])assert.throws(()=>client.suggestAlternatives('x.invalid',options),RangeError);
  for(const query of ['', 'x', 'x'.repeat(201)])assert.throws(()=>client.suggestAlternatives('x.invalid',{query}),TypeError);
 });
+
+test('published copy is preserved and malformed copy is refused',async()=>{
+ for(const copy of [{description:'Published description',use_cases:['Potential use']},{description:'',use_cases:[]}]){
+  const body={...found,domain:{...hit,...copy}};
+  assert.deepEqual(await new Namegarage({fetch:async()=>Response.json(body)}).getDomain('example.invalid'),body);
+ }
+ for(const copy of [{description:null},{use_cases:[1]}])await assert.rejects(new Namegarage({fetch:async()=>Response.json({...found,domain:{...hit,...copy}})}).getDomain('example.invalid'),NamegarageResponseError);
+});

@@ -2,7 +2,7 @@
   "id": "2026-10-27-catalog-parity",
   "components": {
     "api": "1.1.0",
-    "mcp": "1.2.1",
+    "mcp": "1.3.1",
     "sdk": "0.2.0",
     "skill": "1.1.0"
   },
@@ -34,9 +34,9 @@
   ],
   "compatibility": {
     "api": "Adds exact lookup, payment options and alternatives GET routes; existing search/catalog remain compatible.",
-    "mcp": "The same four tools share their operation layer with HTTP; existing envelopes and read-only behavior remain compatible.",
+    "mcp": "Retains MCP 1.3 published descriptions and potential uses while sharing its four read-only operations with HTTP; wire protocol unchanged.",
     "sdk": "Adds typed lookup, payment-option and alternatives methods without changing existing catalog/search methods.",
     "skill": "Documents the four public capabilities, interface selection, privacy and purchase handoff."
   },
-  "skill_sha256": "f94ea131a51947f10c6850142bd64aa1950a9799d41ffd3c7be60f5e9387b5b8"
+  "skill_sha256": "0d2a6628e46fe15c156bdd29fe2171ebafbdc955cfb5ea0c407de2fcf42b10b7"
 }
