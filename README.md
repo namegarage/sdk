@@ -5,7 +5,7 @@ TypeScript and JavaScript client for Namegarage's anonymous public domain catalo
 ## Install
 
 ```bash
-npm install @namegarage/sdk@0.1.0
+npm install @namegarage/sdk@0.2.0
 ```
 
 Use a runtime with native `fetch`, `AbortController`, `AbortSignal.any` and `DOMException`, such as Node.js 22 or later or a modern browser. You can supply your own `fetch` implementation.
@@ -26,7 +26,7 @@ for (const domain of matches.results) {
 }
 ```
 
-No account, API key, bearer token or browser cookie is required. Requests omit credentials. The client only makes GET requests to `/domains.json` and `/api/search`.
+No account, API key, bearer token or browser cookie is required. Requests omit credentials. The client only makes GET requests to the documented catalog, search, domain lookup, purchase-option and alternatives routes.
 
 Search options are `maxPrice` (positive whole USD), `tier` (`Platinum`, `Gold`, `Silver`, `Bronze`, `Bargain`), `tld` (such as `com` or `co.uk`), `maxLength` (1–63), and `limit` (1–50). Responses retain the API's field names.
 
@@ -91,10 +91,40 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned to the published `@namegarage/sdk@0.1.0`. New projects should use
+packages pinned to the published `@namegarage/sdk@0.2.0`. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
 ## License
 
 MIT. Copyright 2026 Namegarage.
+
+## Domain details, payment options and alternatives
+
+```ts
+const domain = await client.getDomain('example.invalid');
+const options = await client.getPurchaseOptions('example.invalid');
+const alternatives = await client.suggestAlternatives('example.invalid', {
+  query: 'meal-planning app', maxPrice: 3000, limit: 5,
+});
+```
+
+The `.invalid` name is fictional. `getDomain()` and `getPurchaseOptions()` return
+`{name, priced_at, found, domain}`; an absent listing is `found: false` with
+`domain: null`, not proof of registration availability. Published description
+and use-case fields are preserved when the server supplies them; do not invent
+withheld copy. Alternatives exclude the reference before limiting and may use
+its first label when no project query is supplied.
+
+Payment values come from `domain.purchase_options`: USD outright price, lease
+principal and standard zero-down schedules. Compare monthly and final payments,
+total and extra cost versus cash. A cash-only discount may not reduce the lease
+principal. Null outright price means offer-only; an empty plan list means no
+standard standalone plan is published. Follow the returned domain URL for current
+terms, other payment choices and additional checkout fees. These methods do not
+create quotes, holds, checkout sessions, messages, purchases or accounts.
+
+Search descriptions are sent to Namegarage; omit confidential project details.
+All methods support cancellation and the same timeout/refusal handling. The
+[developer changelog](https://namegarage.com/developers/changelog/) and bundled
+`release.json` record coordinated component versions.

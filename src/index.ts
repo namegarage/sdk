@@ -51,6 +51,35 @@ export interface SearchResponse {
   count: number;
   results: SearchResult[];
 }
+export interface DomainDetails extends SearchResult {
+  /** Published copy, when supplied by the server; empty values can mean withheld. */
+  description?: string;
+  use_cases?: string[];
+}
+export interface DomainResponse<T extends SearchResult = DomainDetails> {
+  name: string;
+  priced_at: number;
+  found: boolean;
+  domain: T | null;
+}
+export interface LeasePlan {
+  months: number;
+  down_payment_usd: number;
+  first_payment_usd: number;
+  monthly_payment_usd: number;
+  final_payment_usd: number;
+  total_usd: number;
+  extra_cost_vs_buy_outright_usd: number;
+}
+export interface PurchaseOptions {
+  currency: 'USD';
+  buy_outright: {total_usd: number} | null;
+  lease_base_price_usd: number | null;
+  lease_to_own: LeasePlan[];
+}
+export interface PurchaseDomain extends SearchResult { purchase_options: PurchaseOptions }
+export interface AlternativesResponse extends SearchResponse { name: string }
+export interface AlternativesOptions extends RequestOptions { query?: string; maxPrice?: number; limit?: number }
 export interface RequestOptions { signal?: AbortSignal }
 export interface SearchOptions extends RequestOptions {
   maxPrice?: number;
@@ -131,6 +160,37 @@ function search(x: unknown): x is SearchResponse {
     && text(x.meaning) && ['available', 'unavailable'].includes(x.meaning)
     && Array.isArray(x.results) && x.results.every(searchResult) && x.count === x.results.length;
 }
+function lookup(x: unknown): x is DomainResponse {
+  return object(x) && text(x.name) && integer(x.priced_at) && typeof x.found === 'boolean'
+    && (x.found ? searchResult(x.domain) && object(x.domain) && x.domain.match === 'exact'
+      && optional(x.domain, 'description', text)
+      && optional(x.domain, 'use_cases', value => Array.isArray(value) && value.every(text)) : x.domain === null);
+}
+function paymentLookup(x: unknown): x is DomainResponse<PurchaseDomain> {
+  if (!lookup(x)) return false;
+  if (!x.found) return true;
+  const row = x.domain;
+  if (!object(row) || !object(row.purchase_options)) return false;
+  const p = row.purchase_options;
+  if (p.currency !== 'USD' || !nullablePrice(p.lease_base_price_usd) || !Array.isArray(p.lease_to_own)) return false;
+  if (row.price_usd === null) return p.buy_outright === null && p.lease_base_price_usd === null && p.lease_to_own.length === 0;
+  if (!object(p.buy_outright) || !integer(p.buy_outright.total_usd) || p.buy_outright.total_usd !== row.price_usd
+      || !integer(p.lease_base_price_usd) || p.lease_base_price_usd < 1) return false;
+  return p.lease_to_own.every(plan => object(plan) && integer(plan.months) && plan.months >= 2
+    && plan.down_payment_usd === 0 && integer(plan.first_payment_usd) && plan.first_payment_usd > 0
+    && plan.first_payment_usd === plan.monthly_payment_usd && integer(plan.monthly_payment_usd)
+    && integer(plan.final_payment_usd) && plan.final_payment_usd > 0
+    && integer(plan.total_usd) && integer(plan.extra_cost_vs_buy_outright_usd));
+}
+function alternatives(x: unknown): x is AlternativesResponse {
+  return search(x) && object(x) && text(x.name);
+}
+function nameParams(name: string): URLSearchParams {
+  if (typeof name !== 'string' || [...name].length > 200 || !/^[\p{L}\p{N}](?:[\p{L}\p{N}\p{M}-]*[\p{L}\p{N}\p{M}])?(?:\.[\p{L}\p{N}](?:[\p{L}\p{N}\p{M}-]*[\p{L}\p{N}\p{M}])?)+$/u.test(name.trim().normalize('NFC')))
+    throw new TypeError('name must be a complete domain name without a URL, path, query or fragment');
+  return new URLSearchParams({name});
+}
+
 function retrySeconds(value: string | null): number | null {
   if (value === null) return null;
   if (/^\d+$/.test(value.trim())) {
@@ -164,7 +224,7 @@ export class Namegarage {
     this.#fetch = fetcher;
   }
   getCatalog(options: RequestOptions = {}): Promise<CatalogResponse> {
-    return this.#request('/domains.json', catalog, options.signal);
+    return this.#request(defaults.routes.catalog, catalog, options.signal);
   }
   searchDomains(query: string, options: SearchOptions = {}): Promise<SearchResponse> {
     if (typeof query !== 'string') throw new TypeError('query must be a string');
@@ -186,7 +246,24 @@ export class Namegarage {
       if (typeof options.tld !== 'string') throw new TypeError('tld must be a string');
       params.set('tld', options.tld);
     }
-    return this.#request(`/api/search?${params}`, search, options.signal);
+    return this.#request(`${defaults.routes.search}?${params}`, search, options.signal);
+  }
+  getDomain(name: string, options: RequestOptions = {}): Promise<DomainResponse> {
+    return this.#request(`${defaults.routes.domain}?${nameParams(name)}`, lookup, options.signal);
+  }
+  getPurchaseOptions(name: string, options: RequestOptions = {}): Promise<DomainResponse<PurchaseDomain>> {
+    return this.#request(`${defaults.routes.purchaseOptions}?${nameParams(name)}`, paymentLookup, options.signal);
+  }
+  suggestAlternatives(name: string, options: AlternativesOptions = {}): Promise<AlternativesResponse> {
+    const params = nameParams(name);
+    if (options.query !== undefined) {
+      if (typeof options.query !== 'string' || [...options.query].length < 2 || [...options.query].length > 200)
+        throw new TypeError('query must contain 2 to 200 characters');
+      params.set('query', options.query);
+    }
+    if (options.maxPrice !== undefined) { positiveInteger(options.maxPrice, 'maxPrice'); params.set('max_price', String(options.maxPrice)); }
+    if (options.limit !== undefined) { positiveInteger(options.limit, 'limit', 50); params.set('limit', String(options.limit)); }
+    return this.#request(`${defaults.routes.alternatives}?${params}`, alternatives, options.signal);
   }
   async #request<T>(path: string, validate: (value: unknown) => value is T, signal?: AbortSignal): Promise<T> {
     const timeout = new AbortController();
