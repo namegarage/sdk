@@ -1,6 +1,6 @@
 {
   "name": "@namegarage/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Typed client for Namegarage public domain catalog and search APIs.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -19,12 +19,14 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md",
+    "release.json"
   ],
   "sideEffects": false,
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && npm run build && node scripts/check-release.mjs",
     "test": "npm run build && node --test test/*.test.mjs",
     "test:package": "node scripts/verify-package.mjs",
     "test:aliases": "node scripts/verify-aliases.mjs"

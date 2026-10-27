@@ -1,0 +1,42 @@
+{
+  "id": "2026-10-27-catalog-parity",
+  "components": {
+    "api": "1.1.0",
+    "mcp": "1.2.1",
+    "sdk": "0.2.0",
+    "skill": "1.1.0"
+  },
+  "capabilities": [
+    {
+      "tool": "search_domains",
+      "http": "/api/search",
+      "sdk": "searchDomains",
+      "summary": "Search published domains"
+    },
+    {
+      "tool": "get_domain",
+      "http": "/api/domain",
+      "sdk": "getDomain",
+      "summary": "Look up a published domain"
+    },
+    {
+      "tool": "get_purchase_options",
+      "http": "/api/purchase-options",
+      "sdk": "getPurchaseOptions",
+      "summary": "Compare outright and lease-to-own options"
+    },
+    {
+      "tool": "suggest_alternatives",
+      "http": "/api/alternatives",
+      "sdk": "suggestAlternatives",
+      "summary": "Find published alternatives"
+    }
+  ],
+  "compatibility": {
+    "api": "Adds exact lookup, payment options and alternatives GET routes; existing search/catalog remain compatible.",
+    "mcp": "The same four tools share their operation layer with HTTP; existing envelopes and read-only behavior remain compatible.",
+    "sdk": "Adds typed lookup, payment-option and alternatives methods without changing existing catalog/search methods.",
+    "skill": "Documents the four public capabilities, interface selection, privacy and purchase handoff."
+  },
+  "skill_sha256": "f94ea131a51947f10c6850142bd64aa1950a9799d41ffd3c7be60f5e9387b5b8"
+}

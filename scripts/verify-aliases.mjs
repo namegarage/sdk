@@ -14,8 +14,13 @@ const archives=[];
 for(const name of names){
  const dir=join(root,'aliases',name);
  const manifest=JSON.parse(await readFile(join(dir,'package.json')));
- assert.deepEqual(manifest.dependencies,{'@namegarage/sdk':'0.1.0'});
- assert.equal(manifest.version,'0.1.0');assert.equal(manifest.license,'MIT');
+ assert.deepEqual(manifest.dependencies,{'@namegarage/sdk':'0.2.0'});
+ if(process.env.NAMEGARAGE_CANONICAL_ARCHIVE){
+  const canonicalBytes=await readFile(process.env.NAMEGARAGE_CANONICAL_ARCHIVE);
+  const lock=JSON.parse(await readFile(join(dir,'package-lock.json')));
+  assert.equal(lock.packages['node_modules/@namegarage/sdk'].integrity,'sha512-'+createHash('sha512').update(canonicalBytes).digest('base64'),'Alias lock must match the exact canonical archive');
+ }
+ assert.equal(manifest.version,'0.2.0');assert.equal(manifest.license,'MIT');
  assert.equal(manifest.scripts,undefined);
  const packed=JSON.parse(execFileSync(npm,['pack','--ignore-scripts','--json'],{cwd:dir,encoding:'utf8'}))[0];
  assert.deepEqual(packed.files.map(x=>x.path).sort(),['LICENSE','README.md','index.cjs','index.d.cts','index.d.ts','index.js','package.json'].sort());
@@ -24,9 +29,9 @@ for(const name of names){
 }
 const consumer=await mkdtemp(join(tmpdir(),'namegarage-alias-consumer-'));
 await writeFile(join(consumer,'package.json'),JSON.stringify({private:true,type:'module'}));
-execFileSync(npm,['install',...archives.map(x=>x.path),'--ignore-scripts','--no-audit','--no-fund','--cache=/private/tmp/namegarage-alias-npm-cache'],{cwd:consumer,stdio:'pipe'});
+execFileSync(npm,['install',...(process.env.NAMEGARAGE_CANONICAL_ARCHIVE?[process.env.NAMEGARAGE_CANONICAL_ARCHIVE]:[]),...archives.map(x=>x.path),'--ignore-scripts','--no-audit','--no-fund','--cache=/private/tmp/namegarage-alias-npm-cache'],{cwd:consumer,stdio:'pipe'});
 const canonical=JSON.parse(await readFile(join(consumer,'node_modules/@namegarage/sdk/package.json')));
-assert.equal(canonical.version,'0.1.0');assert.equal(Object.keys(canonical.dependencies||{}).length,0);
+assert.equal(canonical.version,'0.2.0');assert.equal(Object.keys(canonical.dependencies||{}).length,0);
 await writeFile(join(consumer,'runtime.mjs'),`import assert from 'node:assert/strict';
 const canonical=await import('@namegarage/sdk');
 for(const name of ${JSON.stringify(names)}){
@@ -42,7 +47,7 @@ execFileSync(process.execPath,['-e',`const assert=require('node:assert/strict');
 const bundles={};
 for(const name of names){
  for(const ext of ['mts','cts']){
-  const source=`import {Namegarage,NamegarageApiError,type SearchResponse} from '${name}';const client=new Namegarage();const pending:Promise<SearchResponse>=client.searchDomains('meal plan',{maxPrice:5000,limit:3});void pending;void NamegarageApiError;`;
+  const source=`import {Namegarage,NamegarageApiError,type DomainResponse, type PurchaseDomain, type AlternativesResponse, type SearchResponse} from '${name}';const client=new Namegarage();const pending:Promise<SearchResponse>=client.searchDomains('meal plan',{maxPrice:5000,limit:3});const detail:Promise<DomainResponse>=client.getDomain('example.invalid');const payments:Promise<DomainResponse<PurchaseDomain>>=client.getPurchaseOptions('example.invalid');const alternatives:Promise<AlternativesResponse>=client.suggestAlternatives('example.invalid',{limit:3});void detail;void payments;void alternatives;void pending;void NamegarageApiError;`;
   const file=join(consumer,`${name}.${ext}`);await writeFile(file,source);
   execFileSync(process.execPath,[join(root,'node_modules/typescript/bin/tsc'),'--noEmit','--strict','--target','ES2022','--module','NodeNext','--moduleResolution','NodeNext',file],{cwd:consumer,stdio:'pipe'});
  }
@@ -50,7 +55,7 @@ for(const name of names){
  assert(!Object.keys(result.metafile.inputs).some(x=>x.startsWith('node:')));
  bundles[name]=result.outputFiles[0].contents.length;
 }
-const report={status:'passed',archives,consumer,esm:true,commonjs:true,typescriptESM:true,typescriptCJS:true,fakeFetchOnly:true,browserBundleBytes:bundles,canonicalVersion:'0.1.0',canonicalRuntimeDependencies:0};
+const report={status:'passed',archives,consumer,esm:true,commonjs:true,typescriptESM:true,typescriptCJS:true,fakeFetchOnly:true,browserBundleBytes:bundles,canonicalVersion:'0.2.0',canonicalRuntimeDependencies:0};
 await mkdir(join(root,'output'),{recursive:true});
 await writeFile(join(root,'output/alias-verification.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
