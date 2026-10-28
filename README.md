@@ -144,10 +144,8 @@ they remain compatible and are reused without republishing their version.
 
 ## Reader-experience release coordination
 
-The source release record now tracks `2026-10-28-reader-experience`. Its website
-component adds Google's preferred-source popup and a separately configured free
-newsletter prompt. The public catalog contracts, runtime methods/instructions
-and existing immutable package versions are unchanged. This metadata update
-does not republish a package or rewrite an existing tag. The prior A2A
-candidate's outstanding directory-preview acceptance remains explicit in the
-[central changelog](https://namegarage.com/developers/changelog/).
+The source release record now tracks `2026-10-28-blog-newsletter`. Website 1.1.0
+connects consented blog signup to confirmed daily delivery and permanent
+unsubscribe. Catalog API, MCP, SDK, skill and A2A contracts retain their versions.
+This updates source coordination metadata; published archives and tags remain
+immutable. The inherited skills.sh listing-preview acceptance remains pending.
