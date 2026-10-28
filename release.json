@@ -1,12 +1,12 @@
 {
-  "id": "2026-10-28-reader-experience",
+  "id": "2026-10-28-blog-newsletter",
   "components": {
     "api": "1.2.0",
     "mcp": "1.3.1",
     "sdk": "0.2.0",
     "skill": "1.2.0",
     "a2a": "1.0.0",
-    "website": "1.0.0"
+    "website": "1.1.0"
   },
   "capabilities": [
     {
@@ -35,12 +35,12 @@
     }
   ],
   "compatibility": {
-    "api": "API 1.2.0 keeps the existing anonymous catalog GET contracts and read-only A2A adapter; this release changes only the website reader experience.",
+    "api": "API 1.2.0 retains the anonymous catalog GET contracts and read-only A2A adapter. Newsletter signup and signed email actions are separate website flows, not catalog capabilities.",
     "mcp": "MCP 1.3.1 retains the same four tools, inputs, outputs and anonymous read-only boundary.",
     "sdk": "SDK 0.2.0 and both exact compatibility aliases remain unchanged. Source coordination metadata tracks this release; immutable npm archives and the v0.2.0 tag retain their original catalog-parity metadata and are not republished.",
-    "skill": "Skill 1.2.0 retains exactly the reviewed A2A/MCP/HTTP instructions and SHA-256. Update source coordination metadata only; preserve immutable tags, installs and MIT-0.",
-    "a2a": "A2A 1.0.0 keeps the existing stateless JSON-RPC direct-Message profile and its signed isolated acceptance evidence. No transport or admission behavior changes.",
-    "website": "Website 1.0.0 is the first separately tracked reader-experience component: native Google preferred-source popup on explicit blog follow clicks, plus the separately activated free newsletter CTA. Podcasts stay excluded."
+    "skill": "Skill 1.2.0 retains the same reviewed A2A/MCP/HTTP instructions, exact SHA-256 and MIT-0 license. Only source coordination metadata changes; published tags and installs remain immutable.",
+    "a2a": "A2A 1.0.0 keeps the existing stateless JSON-RPC direct-Message profile and signed isolated acceptance evidence. No transport or admission behavior changes.",
+    "website": "Website 1.1.0 captures consented Google or first-party blog signup requests, requires intentional email confirmation, delivers untracked daily digests through Resend and provides permanent blog-only unsubscribe. Reader prompts remain separately opted in; podcasts remain excluded."
   },
   "skill_sha256": "b97307b2060bcf7e2e15682c16b4cadd1e00822df438c835ce30a4976e1e6b4c",
   "adapters": [
