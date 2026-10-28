@@ -137,6 +137,17 @@ This SDK keeps version 0.2.0 and its existing methods; it does not add an A2A
 transport or require authentication. Both compatibility packages keep their exact
 `@namegarage/sdk@0.2.0` dependency.
 
-The source `release.json` tracks the coordinated A2A release. Published npm
+The source `release.json` tracks the latest coordinated release. Published npm
 archives and the immutable v0.2.0 tag retain the original catalog-parity metadata;
 they remain compatible and are reused without republishing their version.
+
+
+## Reader-experience release coordination
+
+The source release record now tracks `2026-10-28-reader-experience`. Its website
+component adds Google's preferred-source popup and a separately configured free
+newsletter prompt. The public catalog contracts, runtime methods/instructions
+and existing immutable package versions are unchanged. This metadata update
+does not republish a package or rewrite an existing tag. The prior A2A
+candidate's outstanding directory-preview acceptance remains explicit in the
+[central changelog](https://namegarage.com/developers/changelog/).
