@@ -142,10 +142,14 @@ archives and the immutable v0.2.0 tag retain the original catalog-parity metadat
 they remain compatible and are reused without republishing their version.
 
 
-## Reader-experience release coordination
+## OpenAPI media-type release coordination
 
-The source release record now tracks `2026-10-28-blog-newsletter`. Website 1.1.0
-connects consented blog signup to confirmed daily delivery and permanent
-unsubscribe. Catalog API, MCP, SDK, skill and A2A contracts retain their versions.
-This updates source coordination metadata; published archives and tags remain
-immutable. The inherited skills.sh listing-preview acceptance remains pending.
+The source release record tracks `2026-10-28-openapi-media-type`. API 1.2.1 makes
+every RFC 9727 catalog link to `/openapi.json` advertise `application/json`,
+matching the document's existing response type. Published SDK 0.2.0 packages
+and the skill 1.2.0 artifact retain their immutable versions and bytes. Catalog
+methods, response schemas, skill instructions and exact dependency pins stay
+unchanged. Website 1.1.0 remains a staged newsletter component; its public
+activation and verification are pending. The combined release also retains the
+inherited skills.sh listing-preview gap in the
+[central changelog](https://namegarage.com/developers/changelog/).
