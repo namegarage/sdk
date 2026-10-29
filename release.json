@@ -40,7 +40,7 @@
     "sdk": "SDK 0.2.0 and both exact compatibility aliases remain unchanged. Source coordination metadata tracks this release; immutable npm archives and the v0.2.0 tag retain their original catalog-parity metadata and are not republished.",
     "skill": "Skill 1.2.0 retains the same reviewed A2A/MCP/HTTP instructions, exact SHA-256 and MIT-0 license. Only source coordination metadata changes; published tags and installs remain immutable.",
     "a2a": "A2A 1.0.0 keeps the existing stateless JSON-RPC direct-Message profile and signed isolated acceptance evidence. No transport or admission behavior changes.",
-    "website": "Website 1.1.1 captures consented Google or first-party blog signup requests, requires intentional email confirmation, delivers untracked daily digests through Resend and provides permanent blog-only unsubscribe. Reader prompts remain separately opted in; podcasts remain excluded. Deployment and isolated delivery acceptance remain pending."
+    "website": "Website 1.1.1 captures consented Google or first-party blog signup requests, requires intentional email confirmation, delivers untracked daily digests through Resend and provides permanent blog-only unsubscribe. Reader prompts remain separately opted in; podcasts remain excluded."
   },
   "skill_sha256": "b97307b2060bcf7e2e15682c16b4cadd1e00822df438c835ce30a4976e1e6b4c",
   "adapters": [
