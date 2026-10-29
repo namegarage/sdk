@@ -1,12 +1,12 @@
 {
-  "id": "2026-10-28-openapi-media-type",
+  "id": "2026-10-28-blog-newsletter",
   "components": {
     "api": "1.2.1",
     "mcp": "1.3.1",
     "sdk": "0.2.0",
     "skill": "1.2.0",
     "a2a": "1.0.0",
-    "website": "1.1.0"
+    "website": "1.1.1"
   },
   "capabilities": [
     {
@@ -35,12 +35,12 @@
     }
   ],
   "compatibility": {
-    "api": "API 1.2.1 corrects the RFC 9727 service-desc media type for every link to /openapi.json to application/json, matching its existing response Content-Type. Anonymous operations, URLs and response schemas remain compatible.",
-    "mcp": "MCP 1.3.1 keeps its four tool contracts, transport and server-card document unchanged. This correction affects OpenAPI discovery links only.",
-    "sdk": "SDK 0.2.0 and its exact compatibility-package pins stay unchanged and immutable. The client does not consume the API catalog media-type hint; methods, types and response handling remain compatible. Source release.json records this API patch without republishing package versions.",
-    "skill": "Skill 1.2.0 and its MIT-0 canonical artifact retain identical bytes and existing installation commands. Public capabilities and privacy guidance are unchanged. Source release.json records this API patch; inherited directory acceptance remains explicit.",
-    "a2a": "A2A 1.0.0 retains its independent stateless JSON-RPC 1.0 direct-Message profile and read-only selection behavior.",
-    "website": "Website 1.1.0 remains the staged newsletter component for consented signup, intentional email confirmation, untracked daily digests and permanent blog-only unsubscribe. Public bridge activation and verification remain pending. Reader prompts stay separately opted in and podcasts excluded. This API discovery correction activates no reader or email flow."
+    "api": "API 1.2.1 retains the corrected application/json OpenAPI discovery links, anonymous catalog GET contracts and read-only A2A adapter. Newsletter signup and signed email actions are separate website flows, not catalog capabilities.",
+    "mcp": "MCP 1.3.1 retains the same four tools, inputs, outputs and anonymous read-only boundary.",
+    "sdk": "SDK 0.2.0 and both exact compatibility aliases remain unchanged. Source coordination metadata tracks this release; immutable npm archives and the v0.2.0 tag retain their original catalog-parity metadata and are not republished.",
+    "skill": "Skill 1.2.0 retains the same reviewed A2A/MCP/HTTP instructions, exact SHA-256 and MIT-0 license. Only source coordination metadata changes; published tags and installs remain immutable.",
+    "a2a": "A2A 1.0.0 keeps the existing stateless JSON-RPC direct-Message profile and signed isolated acceptance evidence. No transport or admission behavior changes.",
+    "website": "Website 1.1.1 captures consented Google or first-party blog signup requests, requires intentional email confirmation, delivers untracked daily digests through Resend and provides permanent blog-only unsubscribe. Reader prompts remain separately opted in; podcasts remain excluded. Deployment and isolated delivery acceptance remain pending."
   },
   "skill_sha256": "b97307b2060bcf7e2e15682c16b4cadd1e00822df438c835ce30a4976e1e6b4c",
   "adapters": [
