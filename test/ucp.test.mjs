@@ -36,3 +36,16 @@ test('UCP batch lookup requires protocol correlation metadata',async()=>{
  const client=new Namegarage({fetch:async(url,init)=>Response.json(init.method==='GET'?profile:{ucp,products:[product]})});
  await assert.rejects(client.lookupUcpCatalog({ids:['example.invalid']},{platformProfile:platform}),NamegarageResponseError);
 });
+
+test('UCP response guards reject malformed present typed fields and registries',async()=>{
+ const valid={ucp,products:[product],pagination:{has_next_page:false}};
+ for(const mutate of [
+  x=>{x.ucp.status=7;},x=>{x.messages='not an array';},x=>{x.products[0].description.plain=5;},
+  x=>{x.products[0].url=5;},x=>{x.products[0].variants[0].availability.available='yes';},
+  x=>{x.messages=[{type:'warning',content:'Synthetic',code:7}];},
+  x=>{x.messages=[{type:'warning',content:'Synthetic',code:'not_found',path:7}];},
+  x=>{x.ucp.capabilities['dev.ucp.shopping.permalink']={version};},
+ ]) {const body=structuredClone(valid);mutate(body);const client=new Namegarage({fetch:async(url,init)=>Response.json(init.method==='GET'?profile:body)});await assert.rejects(client.searchUcpCatalog({}, {platformProfile:platform}),NamegarageResponseError);}
+ const malformed=structuredClone(profile);malformed.ucp.capabilities['dev.ucp.shopping.permalink']={version};
+ await assert.rejects(new Namegarage({fetch:async()=>Response.json(malformed)}).getUcpProfile(),NamegarageResponseError);
+});

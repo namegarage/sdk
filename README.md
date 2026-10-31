@@ -131,29 +131,13 @@ All methods support cancellation and the same timeout/refusal handling. The
 [developer changelog](https://namegarage.com/developers/changelog/) and bundled
 `release.json` record coordinated component versions.
 
-## A2A compatibility
+## A2A compatibility and earlier release records
 
-Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a)
-is a separate anonymous protocol adapter over the same public catalog search.
-This SDK keeps version 0.3.0 and its existing methods; it does not add an A2A
-transport or require authentication. Both compatibility packages keep their exact
-`@namegarage/sdk@0.3.0` dependency.
+Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.0`.
 
-The source `release.json` tracks the latest coordinated release. Published npm
-archives and the immutable v0.3.0 tag retain the original catalog-parity metadata;
-they remain compatible and are reused without republishing their version.
+The source `release.json` tracks the upcoming `2026-10-31-ucp-catalog-handoff` candidate. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata and remain unchanged. Version 0.3.0 is a new unpublished candidate.
 
-
-## Newsletter activation release coordination
-
-The source release record tracks `2026-10-28-blog-newsletter`. Website 1.1.1
-connects consented blog signup to confirmed daily delivery and permanent
-unsubscribe. API 1.2.1 retains the preceding OpenAPI media-type correction;
-MCP, SDK, skill and A2A contracts retain their versions. Source coordination
-metadata changes, while published archives and tags remain immutable.
-Website deployment and isolated delivery acceptance are verified. The inherited
-skills.sh listing-preview acceptance remains explicit in the
-[central changelog](https://namegarage.com/developers/changelog/).
+The earlier `2026-10-28-blog-newsletter` record and its evidence remain independently pending in the [central changelog](https://namegarage.com/developers/changelog/). This UCP source update does not complete its outstanding publication acceptance.
 
 ## UCP catalog and buyer handoff
 
