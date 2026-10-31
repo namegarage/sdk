@@ -1,0 +1,55 @@
+.gitattributes
+  s_a9623dbd9fda04::t_3675737d5300c0 1
+aliases/namegarage-sdk/package.json
+  s_a9623dbd9fda04::t_81746db502cf78 3,29
+aliases/namegarage-sdk/README.md
+  s_a9623dbd9fda04::t_ec5317efa27994 4-5,10
+scripts/verify-package.mjs
+  s_a9623dbd9fda04::t_0da78e1efbe0e8 13,18,20
+package-lock.json
+  s_a9623dbd9fda04::t_531a70347154db 3,9
+src/index.ts
+  s_a9623dbd9fda04::t_fc8d8eb0a85502 54-82,163-193,227,249-266
+AGENTS.md
+  s_a9623dbd9fda04::t_fd31d6f77f0550 3,10-20
+aliases/namegarage/README.md
+  s_a9623dbd9fda04::t_8221d864887824 4-5,10
+aliases/namegarage/package.json
+  s_a9623dbd9fda04::t_65063d0ec0ceed 3,29
+scripts/verify-aliases.mjs
+  s_a9623dbd9fda04::t_f9c6a3b0c21b36 17-23,32,34,50,58
+test/catalog-operations.test.mjs
+  s_a9623dbd9fda04::t_437564824f8712 1-42
+scripts/check-release.mjs
+  s_a9623dbd9fda04::t_35244fe9ed1ed2 1-17
+README.md
+  s_a9623dbd9fda04::t_bc5e4f968ccc6e 8,29,94,101-130
+release.json
+  s_a9623dbd9fda04::t_35f98f3abf88f1 1-42
+CHANGELOG.md
+  s_a9623dbd9fda04::t_57ae60a7974d6a 1-11
+package.json
+  s_a9623dbd9fda04::t_8ac9a7c3fbb8e4 3,22-24,29
+src/config.ts
+  s_a9623dbd9fda04::t_f1469c3c36674c 1,5
+aliases/namegarage-sdk/package-lock.json
+  s_a9623dbd9fda04::t_76d5e4ecb496ca 3,9,12,16-18
+aliases/namegarage/package-lock.json
+  s_a9623dbd9fda04::t_4ae82f4f36268c 3,9,12,16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a648a96277205275c2927276d39d0e8bdfbfcc57",
+  "prompts": {},
+  "sessions": {
+    "s_a9623dbd9fda04": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17bd0-936e-7b11-9673-6e1d09b81a86",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}

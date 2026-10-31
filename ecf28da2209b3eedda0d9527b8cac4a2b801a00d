@@ -1,0 +1,21 @@
+README.md
+  s_eb0f586df3699a::t_a68c22d6bb3833 145-153
+release.json
+  s_eb0f586df3699a::t_de5e6a1586ddcb 2,9,38-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ecf28da2209b3eedda0d9527b8cac4a2b801a00d",
+  "prompts": {},
+  "sessions": {
+    "s_eb0f586df3699a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17f44-54cb-7db2-8f75-a4d1bb52c1d8",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}

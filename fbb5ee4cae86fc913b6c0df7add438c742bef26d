@@ -1,0 +1,21 @@
+README.md
+  s_d106a0126da7fa::t_1af26cdd282447 131-142
+release.json
+  s_d106a0126da7fa::t_44cca804e4dc75 2,4,7-8,37-41,43-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fbb5ee4cae86fc913b6c0df7add438c742bef26d",
+  "prompts": {},
+  "sessions": {
+    "s_d106a0126da7fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e7c2006c-eef7-406f-ad06-3d24d7be173d",
+        "model": "unknown"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}

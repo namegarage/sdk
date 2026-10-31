@@ -1,0 +1,19 @@
+README.md
+  s_0f820af75e90dc::t_d37abd58e045d0 145-149,151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9e13954b79e895320033aa1728967b6cf2e70259",
+  "prompts": {},
+  "sessions": {
+    "s_0f820af75e90dc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1820e-96be-71c0-9ae2-1156db06bf77",
+        "model": "unknown"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
