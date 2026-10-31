@@ -1,13 +1,15 @@
 # namegarage
 
+Upcoming 0.3.0 source candidate. The registry install command applies after publication; local archive tests do not establish npm availability.
+
 Compatibility package for the official [@namegarage/sdk](https://github.com/namegarage/sdk).
-Version 0.2.0 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
-only on `@namegarage/sdk@0.2.0`.
+Version 0.3.0 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
+only on `@namegarage/sdk@0.3.0`.
 
 For new projects, install the scoped package directly:
 
 ```bash
-npm install @namegarage/sdk@0.2.0
+npm install @namegarage/sdk@0.3.0
 ```
 
 The client reads Namegarage's anonymous public domain catalog and search API.
