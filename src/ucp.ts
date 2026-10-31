@@ -32,7 +32,7 @@ const description=(x:unknown):boolean=>object(x)&&['plain','html','markdown'].ev
 const price=(x:unknown):boolean=>object(x)&&x.currency==='USD'&&safe(x.amount)&&x.amount>0;
 const correlation=(x:unknown):boolean=>object(x)&&text(x.id)&&optional(x,'match',text);
 const messages=(x:Record<string,unknown>):boolean=>optional(x,'messages',v=>Array.isArray(v)&&v.every(m=>object(m)
-  &&['error','warning','info'].includes(String(m.type))&&text(m.content)&&optional(m,'code',text)&&optional(m,'severity',text)&&optional(m,'path',text)));
+  &&text(m.type)&&['error','warning','info'].includes(m.type)&&text(m.content)&&optional(m,'code',text)&&optional(m,'severity',text)&&optional(m,'path',text)));
 const product=(x:unknown):boolean=>object(x)&&text(x.id)&&text(x.title)&&description(x.description)&&object(x.price_range)&&price(x.price_range.min)&&price(x.price_range.max)
   &&optional(x,'url',text)&&Array.isArray(x.variants)&&x.variants.length>0&&x.variants.every(v=>object(v)&&text(v.id)&&text(v.title)&&description(v.description)&&price(v.price)
     &&optional(v,'url',text)&&optional(v,'availability',a=>object(a)&&optional(a,'available',b=>typeof b==='boolean')&&optional(a,'status',text))

@@ -18,7 +18,7 @@ test('UCP client discovers the service and makes only catalog read requests',asy
  assert.throws(()=>client.createPurchaseLink('example.invalid',{ucp:{...profile.ucp,capabilities:{...profile.ucp.capabilities,'dev.ucp.shopping.permalink':[{version,config:{endpoint:'https://evil.invalid/buy'}}]}}}));
 });
 test('UCP errors include HTTP 200 negotiation errors and are not retried',async()=>{
- let reads=0;const client=new Namegarage({fetch:async(url,init)=>{if(init.method==='GET')return Response.json(profile);reads++;return Response.json({ucp:{version,status:'error'},code:'capabilities_incompatible',messages:[],continue_url:origin});}});
+ let reads=0;const client=new Namegarage({fetch:async(url,init)=>{if(init.method==='GET')return Response.json(profile);reads++;return Response.json({ucp:{version,status:'error'},messages:[{type:'error',code:'capabilities_incompatible',content:'Synthetic negotiation refusal',severity:'unrecoverable'}],continue_url:origin});}});
  await assert.rejects(client.searchUcpCatalog({}, {platformProfile:platform}),e=>e instanceof NamegarageApiError&&e.status===200&&e.code==='capabilities_incompatible');assert.equal(reads,1);
 });
 test('UCP clients reject unsafe profiles, body bounds and malformed success responses',async()=>{
@@ -40,7 +40,7 @@ test('UCP batch lookup requires protocol correlation metadata',async()=>{
 test('UCP response guards reject malformed present typed fields and registries',async()=>{
  const valid={ucp,products:[product],pagination:{has_next_page:false}};
  for(const mutate of [
-  x=>{x.ucp.status=7;},x=>{x.messages='not an array';},x=>{x.products[0].description.plain=5;},
+  x=>{x.ucp.status=7;},x=>{x.messages='not an array';},x=>{x.messages=[{type:['warning'],content:'Synthetic'}];},x=>{x.products[0].description.plain=5;},
   x=>{x.products[0].url=5;},x=>{x.products[0].variants[0].availability.available='yes';},
   x=>{x.messages=[{type:'warning',content:'Synthetic',code:7}];},
   x=>{x.messages=[{type:'warning',content:'Synthetic',code:'not_found',path:7}];},

@@ -106,7 +106,10 @@ export class NamegarageApiError extends Error {
   readonly retryAfterSeconds: number | null;
   readonly body: unknown;
   constructor(status: number, body: unknown, retryAfter: string | null) {
-    const code = object(body) && typeof body.error === 'string' ? body.error : object(body) && typeof body.code === 'string' ? body.code : null;
+    const message = object(body) && object(body.ucp) && body.ucp.status === 'error' && Array.isArray(body.messages)
+      ? body.messages.find(m => object(m) && m.type === 'error' && typeof m.code === 'string') : undefined;
+    const code = object(body) && typeof body.error === 'string' ? body.error : object(body) && typeof body.code === 'string' ? body.code
+      : object(message) && typeof message.code === 'string' ? message.code : null;
     super(`Namegarage request failed: HTTP ${status}${code ? ` (${code})` : ''}`);
     this.name = 'NamegarageApiError';
     this.status = status;
