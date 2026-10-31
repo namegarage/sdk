@@ -1,0 +1,60 @@
+scripts/check-release.mjs
+  s_28fba3d37cd081::t_edf106e05e8d31 9
+aliases/namegarage/package.json
+  s_28fba3d37cd081::t_9b6d37b971e603 3,29
+test/ucp.test.mjs
+  s_28fba3d37cd081::t_a04e2f27ba84e3 9,33-37
+  s_28fba3d37cd081::t_fadeab078f403f 1-8,10-32,38
+src/index.ts
+  s_28fba3d37cd081::t_9b6d37b971e603 1,109,270-298,305,317
+  s_28fba3d37cd081::t_bffc2e16baf5ac 2
+src/ucp.ts
+  s_28fba3d37cd081::t_9b6d37b971e603 1-18,21-34,38-52,55-56
+  s_28fba3d37cd081::t_ed7cf57c7c40ac 36
+  s_28fba3d37cd081::t_edf106e05e8d31 53-54
+  s_28fba3d37cd081::t_4698f08e55c430 19-20,35,37
+CHANGELOG.md
+  s_28fba3d37cd081::t_edf106e05e8d31 3-7
+package.json
+  s_28fba3d37cd081::t_9b6d37b971e603 3
+release.json
+  s_28fba3d37cd081::t_edf106e05e8d31 2,4,6-7,9-10,39-42,44-45,47,60-88
+aliases/namegarage-sdk/README.md
+  s_28fba3d37cd081::t_edf106e05e8d31 4-5,10
+aliases/namegarage-sdk/package.json
+  s_28fba3d37cd081::t_9b6d37b971e603 3,29
+aliases/namegarage/README.md
+  s_28fba3d37cd081::t_edf106e05e8d31 4-5,10
+src/config.ts
+  s_28fba3d37cd081::t_9b6d37b971e603 5
+scripts/verify-aliases.mjs
+  s_28fba3d37cd081::t_3252f06733061e 50
+  s_28fba3d37cd081::t_9b6d37b971e603 17,23,34,58
+scripts/verify-package.mjs
+  s_28fba3d37cd081::t_9b6d37b971e603 18
+  s_28fba3d37cd081::t_3252f06733061e 20
+README.md
+  s_28fba3d37cd081::t_edf106e05e8d31 3-4,10,31,96,138,140,143,157-178
+aliases/namegarage-sdk/package-lock.json
+  s_28fba3d37cd081::t_6779cba69c30a0 3,9,12,16-18
+aliases/namegarage/package-lock.json
+  s_28fba3d37cd081::t_dcbe10ecdcb712 3,9,12,16-18
+package-lock.json
+  s_28fba3d37cd081::t_4b802a3bb372e5 3,9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "74b9cfeefd44e9c13f38539d0d0aa7fc7fae0d75",
+  "prompts": {},
+  "sessions": {
+    "s_28fba3d37cd081": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bbd2-885a-7f31-aa25-c266b5c17892",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
