@@ -1,0 +1,27 @@
+src/index.ts
+  s_28fba3d37cd081::t_365b596c47da3a 109-112
+src/ucp.ts
+  s_28fba3d37cd081::t_365b596c47da3a 35
+test/ucp.test.mjs
+  s_28fba3d37cd081::t_a123bff5306675 21,43
+aliases/namegarage-sdk/package-lock.json
+  s_28fba3d37cd081::t_1a921b773bf65e 18
+aliases/namegarage/package-lock.json
+  s_28fba3d37cd081::t_5a86035f00d998 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b26ebcec1d03e03154f6d9df47bcb92cca02f5c8",
+  "prompts": {},
+  "sessions": {
+    "s_28fba3d37cd081": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bbd2-885a-7f31-aa25-c266b5c17892",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
