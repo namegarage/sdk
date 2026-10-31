@@ -1,11 +1,13 @@
 # @namegarage/sdk
 
+Upcoming 0.3.0 source candidate. The registry installation below applies after publication; local archive tests do not establish npm availability.
+
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
 ## Install
 
 ```bash
-npm install @namegarage/sdk@0.2.0
+npm install @namegarage/sdk@0.3.0
 ```
 
 Use a runtime with native `fetch`, `AbortController`, `AbortSignal.any` and `DOMException`, such as Node.js 22 or later or a modern browser. You can supply your own `fetch` implementation.
@@ -26,7 +28,7 @@ for (const domain of matches.results) {
 }
 ```
 
-No account, API key, bearer token or browser cookie is required. Requests omit credentials. The client only makes GET requests to the documented catalog, search, domain lookup, purchase-option and alternatives routes.
+No account, API key, bearer token or browser cookie is required. Requests omit credentials. Existing catalog methods make GET requests. UCP helpers discover the advertised service and make POST catalog reads, with an exact reviewed platform profile. They cannot start checkout or authorize a purchase.
 
 Search options are `maxPrice` (positive whole USD), `tier` (`Platinum`, `Gold`, `Silver`, `Bronze`, `Bargain`), `tld` (such as `com` or `co.uk`), `maxLength` (1–63), and `limit` (1–50). Responses retain the API's field names.
 
@@ -91,7 +93,7 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned to the published `@namegarage/sdk@0.2.0`. New projects should use
+packages pinned to the published `@namegarage/sdk@0.3.0`. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
@@ -133,12 +135,12 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a)
 is a separate anonymous protocol adapter over the same public catalog search.
-This SDK keeps version 0.2.0 and its existing methods; it does not add an A2A
+This SDK keeps version 0.3.0 and its existing methods; it does not add an A2A
 transport or require authentication. Both compatibility packages keep their exact
-`@namegarage/sdk@0.2.0` dependency.
+`@namegarage/sdk@0.3.0` dependency.
 
 The source `release.json` tracks the latest coordinated release. Published npm
-archives and the immutable v0.2.0 tag retain the original catalog-parity metadata;
+archives and the immutable v0.3.0 tag retain the original catalog-parity metadata;
 they remain compatible and are reused without republishing their version.
 
 
@@ -152,3 +154,25 @@ metadata changes, while published archives and tags remain immutable.
 Website deployment and isolated delivery acceptance are verified. The inherited
 skills.sh listing-preview acceptance remains explicit in the
 [central changelog](https://namegarage.com/developers/changelog/).
+
+## UCP catalog and buyer handoff
+
+UCP protocol 2026-08-25 is available only when Namegarage advertises its profile. Production activation and real-platform acceptance are separate from this source candidate. Use existing HTTP/MCP reads when the profile is unavailable.
+
+```ts
+const profile = await client.getUcpProfile();
+const options = {platformProfile: 'https://your-platform.example/.well-known/ucp'};
+const found = await client.searchUcpCatalog({query: 'meal planning', pagination: {limit: 10}}, options);
+if (found.products[0]) {
+  const detail = await client.getUcpProduct({id: found.products[0].id}, options);
+  const browserUrl = client.createPurchaseLink(detail.product.id, profile);
+  // Present browserUrl to the buyer. This helper makes no network request.
+}
+const batch = await client.lookupUcpCatalog({ids: ['example.invalid']}, options);
+```
+
+The platform URL must be reviewed and configured by Namegarage before catalog requests are accepted. The SDK never fetches that URL itself. Each read discovers the business REST endpoint, verifies it stays on the documented same-origin catalog path, then sends the read request. No credentials or cookies are sent and redirects are refused.
+
+Follow `pagination.has_next_page` and its opaque cursor. Pages are at most 20 products; lookup batches accept at most 20 IDs. Price filters and response prices use safe integer USD minor units. A changed price or availability can invalidate a cursor; start again. Offer-only and held names are excluded. A result is not a reservation or a locked quote. Avoid personal and confidential query context.
+
+The buyer follows the purchase link, reviews the selected domain and current website terms, and completes checkout on Namegarage. A local link helper cannot create a cart, account, offer, reservation, order or payment. `NamegarageApiError` also reports UCP negotiation errors returned with HTTP 200; requests are never retried automatically.

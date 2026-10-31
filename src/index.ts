@@ -1,3 +1,5 @@
+import {ucpProfile,ucpSearch,ucpLookup,ucpProduct,ucpBody,ucpId, type UcpBusinessProfile,type UcpSearchRequest,type UcpLookupRequest,type UcpProductRequest,type UcpSearchResponse,type UcpLookupResponse,type UcpProductResponse,type UcpRequestOptions} from './ucp.js';
+export type {UcpEntity,UcpMetadata,UcpBusinessProfile,UcpPrice,UcpProduct,UcpMessage,UcpSearchRequest,UcpLookupRequest,UcpProductRequest,UcpSearchResponse,UcpLookupResponse,UcpLookupProduct,UcpProductResponse,UcpRequestOptions} from './ucp.js';
 import { defaults } from './config.js';
 
 export type Tier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze' | 'Bargain';
@@ -104,7 +106,7 @@ export class NamegarageApiError extends Error {
   readonly retryAfterSeconds: number | null;
   readonly body: unknown;
   constructor(status: number, body: unknown, retryAfter: string | null) {
-    const code = object(body) && typeof body.error === 'string' ? body.error : null;
+    const code = object(body) && typeof body.error === 'string' ? body.error : object(body) && typeof body.code === 'string' ? body.code : null;
     super(`Namegarage request failed: HTTP ${status}${code ? ` (${code})` : ''}`);
     this.name = 'NamegarageApiError';
     this.status = status;
@@ -265,14 +267,42 @@ export class Namegarage {
     if (options.limit !== undefined) { positiveInteger(options.limit, 'limit', 50); params.set('limit', String(options.limit)); }
     return this.#request(`${defaults.routes.alternatives}?${params}`, alternatives, options.signal);
   }
-  async #request<T>(path: string, validate: (value: unknown) => value is T, signal?: AbortSignal): Promise<T> {
+  getUcpProfile(options: RequestOptions = {}): Promise<UcpBusinessProfile> {
+    return this.#request(defaults.ucp.profile,ucpProfile,options.signal);
+  }
+  searchUcpCatalog(body: UcpSearchRequest, options: UcpRequestOptions): Promise<UcpSearchResponse> {
+    const serialized=ucpBody(body,'search',options.platformProfile);
+    return this.#ucp('/catalog/search',serialized,ucpSearch,options);
+  }
+  lookupUcpCatalog(body: UcpLookupRequest, options: UcpRequestOptions): Promise<UcpLookupResponse> {
+    const serialized=ucpBody(body,'lookup',options.platformProfile);
+    return this.#ucp('/catalog/lookup',serialized,ucpLookup,options);
+  }
+  getUcpProduct(body: UcpProductRequest, options: UcpRequestOptions): Promise<UcpProductResponse> {
+    const serialized=ucpBody(body,'product',options.platformProfile);
+    return this.#ucp('/catalog/product',serialized,ucpProduct,options);
+  }
+  /** Construct a browser handoff locally. No fetch, reservation or purchase. */
+  createPurchaseLink(name: string, profile: UcpBusinessProfile): string {
+    if(!ucpProfile(profile))throw new NamegarageResponseError();
+    const endpoint=profile.ucp.capabilities['dev.ucp.shopping.permalink']?.find(e=>e.version===defaults.ucp.version)?.config?.endpoint;
+    if(endpoint!==this.#origin+defaults.ucp.permalink)throw new NamegarageResponseError();
+    return endpoint+'/'+ucpId(name)+':1';
+  }
+  async #ucp<T>(suffix:string,body:string,validate:(value:unknown)=>value is T,options:UcpRequestOptions):Promise<T> {
+    const profile=await this.getUcpProfile(options);
+    const endpoint=profile.ucp.services['dev.ucp.shopping']?.find(e=>e.version===defaults.ucp.version&&e.transport==='rest')?.endpoint;
+    if(endpoint!==this.#origin+defaults.ucp.restBase)throw new NamegarageResponseError();
+    return this.#request(new URL(endpoint+suffix).pathname,validate,options.signal,{body,profile:options.platformProfile});
+  }
+  async #request<T>(path: string, validate: (value: unknown) => value is T, signal?: AbortSignal, ucp?:{body:string;profile:string}): Promise<T> {
     const timeout = new AbortController();
     const timer = setTimeout(() => timeout.abort(new DOMException('Namegarage request timed out', 'TimeoutError')), this.#timeoutMs);
     const combined = signal ? AbortSignal.any([signal, timeout.signal]) : timeout.signal;
     try {
       combined.throwIfAborted();
       const response = await this.#fetch(new URL(path, this.#origin), {
-        method: 'GET', headers: { Accept: 'application/json' }, credentials: 'omit',
+        method: ucp ? 'POST' : 'GET', headers: { Accept: 'application/json',...(ucp ? {'Content-Type':'application/json','UCP-Agent':`profile="${ucp.profile}"`} : {}) }, ...(ucp ? {body:ucp.body} : {}), credentials: 'omit',
         redirect: 'error', signal: combined,
       });
       const raw = await response.text();
@@ -284,6 +314,7 @@ export class Namegarage {
         body = raw;
       }
       if (!response.ok) throw new NamegarageApiError(response.status, body, response.headers.get('retry-after'));
+      if (ucp && object(body) && object(body.ucp) && body.ucp.status === 'error') throw new NamegarageApiError(response.status, body, response.headers.get('retry-after'));
       if (!validate(body)) throw new NamegarageResponseError();
       return body;
     } finally { clearTimeout(timer); }
