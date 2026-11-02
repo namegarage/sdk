@@ -55,7 +55,7 @@ export function ucpId(value:string):string {
 }
 export function ucpBody(body:UcpSearchRequest|UcpLookupRequest|UcpProductRequest,kind:'search'|'lookup'|'product',platform:string):string {
   const url=new URL(platform);
-  if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||url.port||url.pathname!==defaults.ucp.profile||url.href!==platform)throw new TypeError('Use an exact HTTPS UCP platform profile URL');
+  if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||url.port||url.href!==platform||platform.length+'profile=""'.length>defaults.ucp.maxAgentHeaderBytes)throw new TypeError('Use an exact HTTPS UCP platform profile URL');
   if(!object(body))throw new TypeError('Use a UCP request object');
   const b=body as UcpSearchRequest;
   if(b.query!==undefined&&(!text(b.query)||[...b.query].length>defaults.ucp.maxQueryChars))throw new RangeError('Query is too long');
