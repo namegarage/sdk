@@ -49,3 +49,21 @@ test('UCP response guards reject malformed present typed fields and registries',
  const malformed=structuredClone(profile);malformed.ucp.capabilities['dev.ucp.shopping.permalink']={version};
  await assert.rejects(new Namegarage({fetch:async()=>Response.json(malformed)}).getUcpProfile(),NamegarageResponseError);
 });
+
+
+test('UCP platform profiles use their exact advertised path',async()=>{
+ for(const platformProfile of ['https://shopify.dev/ucp/agent-profiles/2026-08-25/valid-with-capabilities.json','https://ucpplayground.com/.well-known/ucp-agent']){
+  let sent;
+  const client=new Namegarage({fetch:async(url,init)=>{if(init.method==='GET')return Response.json(profile);sent=init.headers['UCP-Agent'];return Response.json({ucp,products:[],pagination:{has_next_page:false}});}});
+  assert.deepEqual((await client.searchUcpCatalog({}, {platformProfile})).products,[]);
+  assert.equal(sent,`profile="${platformProfile}"`);
+ }
+});
+
+test('UCP expired cursors preserve recoverable details without retrying',async()=>{
+ let reads=0;
+ const body={ucp:{...ucp,status:'error'},messages:[{type:'error',code:'cursor_expired',severity:'recoverable',content:'Restart search without a cursor.'}],continue_url:origin};
+ const client=new Namegarage({fetch:async(url,init)=>{if(init.method==='GET')return Response.json(profile);reads++;return Response.json(body,{status:400});}});
+ await assert.rejects(client.searchUcpCatalog({pagination:{cursor:'opaque'}},{platformProfile:platform}),e=>e instanceof NamegarageApiError&&e.status===400&&e.code==='cursor_expired'&&e.body.messages[0].severity==='recoverable');
+ assert.equal(reads,1);
+});
