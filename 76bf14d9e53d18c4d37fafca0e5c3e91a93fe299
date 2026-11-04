@@ -1,0 +1,43 @@
+.gitignore
+  s_b5cbe84e1f7662::t_95ac2678ec395d 1-4
+.node-version
+  s_b5cbe84e1f7662::t_8aa5f60c5e34ef 1
+AGENTS.md
+  s_b5cbe84e1f7662::t_46f1a7637fdffc 1-9
+LICENSE
+  s_b5cbe84e1f7662::t_1f6e8b3c6c9215 1-21
+scripts/build.mjs
+  s_b5cbe84e1f7662::t_53fed2c60bb92f 1-14
+scripts/verify-package.mjs
+  s_b5cbe84e1f7662::t_67e3bdddb08cc4 1-29
+src/config.ts
+  s_b5cbe84e1f7662::t_049d4173c58e55 1-5
+src/index.ts
+  s_b5cbe84e1f7662::t_7caafbc6853764 1-214
+test/client.test.mjs
+  s_b5cbe84e1f7662::t_e971e883142481 1-63
+tsconfig.json
+  s_b5cbe84e1f7662::t_e6fc5b38889f98 1-21
+README.md
+  s_b5cbe84e1f7662::t_d311bcf91cf834 1-93
+package-lock.json
+  s_b5cbe84e1f7662::t_2da8091331e408 1-876
+package.json
+  s_b5cbe84e1f7662::t_c51075c87605aa 1-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "76bf14d9e53d18c4d37fafca0e5c3e91a93fe299",
+  "prompts": {},
+  "sessions": {
+    "s_b5cbe84e1f7662": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a170db-9f85-7200-bc5f-b075053301f0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
