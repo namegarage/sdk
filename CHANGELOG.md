@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.3.0 (upcoming)
+## 0.3.0 — 2026-11-10
 
-Adds typed UCP discovery, catalog search, batch and product lookup, and a local-only browser handoff helper. Existing HTTP reads remain compatible. The buyer completes checkout on Namegarage. SDK and both compatibility aliases remain unpublished candidates.
+Adds typed UCP discovery, catalog search, batch and product lookup, and a local-only browser handoff helper. Existing HTTP reads remain compatible. The buyer completes checkout on Namegarage. Use the custom fetch transport for signed UCP catalog requests. Both compatibility aliases pin SDK 0.3.0.
 
 
 ## 0.2.0 — 2026-10-27
