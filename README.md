@@ -135,7 +135,7 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.0`.
 
-The bundled `release.json` records `2026-11-10-ucp-catalog`. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata.
+The bundled `release.json` records the upcoming `2026-11-10-agreement-signing-sources` release: site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version. SDK 0.3.0 and its exact compatibility pins, published under `2026-11-10-ucp-catalog`, remain current. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata.
 
 Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 
