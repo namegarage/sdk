@@ -1,5 +1,5 @@
 {
-  "id": "2026-11-03-static-browsing",
+  "id": "2026-11-10-ucp-catalog",
   "components": {
     "api": "1.3.0",
     "mcp": "1.3.1",
@@ -36,15 +36,15 @@
     }
   ],
   "compatibility": {
-    "api": "API 1.3.0 adds default-off read-only UCP catalog POST operations. Existing HTTP GET, MCP and A2A contracts stay compatible. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged. /domains.json retains its wire schema but serves the deployed browsing snapshot; /api/domain and /api/purchase-options verify current terms.",
-    "mcp": "MCP 1.3.1 retains its four anonymous read-only tools and existing schemas. UCP shares their catalog authority without adding transactional tools. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged.",
-    "sdk": "SDK 0.3.0 adds typed UCP discovery/catalog reads and a local purchase-link helper. Existing methods remain compatible; both compatibility packages pin exactly 0.3.0. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged. getCatalog() retains its response type and reads the deployed snapshot; getDomain() and getPurchaseOptions() verify current terms.",
-    "skill": "Skill 1.3.0 adds UCP catalog and human checkout guidance while preserving MIT-0 and the existing HTTP/MCP/A2A fallback. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged.",
-    "a2a": "A2A 1.0.0 keeps the existing stateless JSON-RPC direct-Message profile and signed isolated acceptance evidence. No transport or admission behavior changes. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged.",
+    "api": "API 1.3.0 adds read-only UCP catalog POST operations for a configured signing platform. Existing anonymous HTTP GET, MCP and A2A contracts retain their behavior.",
+    "mcp": "MCP 1.3.1 retains its four anonymous read-only tools and schemas. UCP shares their catalog authority.",
+    "sdk": "SDK 0.3.0 adds typed UCP discovery, search, lookup and purchase-link construction. UCP catalog requests use the caller's signing fetch transport. Both compatibility packages pin exactly 0.3.0. Existing anonymous HTTP methods retain their contracts.",
+    "skill": "Skill 1.3.0 adds signed UCP catalog and human checkout guidance, preserving MIT-0 and anonymous HTTP/MCP/A2A fallbacks.",
+    "a2a": "A2A 1.0.0 retains its stateless JSON-RPC direct-Message profile and isolated acceptance evidence.",
     "website": "Website 1.2.1 serves deployed price schedules and availability snapshots without request-time D1 reads. Purchase actions retain fresh D1 checks and fail closed. Activation, withdrawal and availability display changes require a guarded rebuild and deployment.",
-    "ucp": "Application adapter 1.0.0 implements UCP protocol 2026-08-25 catalog search, lookup and permalink. No checkout, orders, identity or payment handlers. Production activation and real-platform acceptance remain pending. This browsing fix keeps this component version: dynamic operations retain fresh price and availability checks, and their schemas, methods, pins and skill bytes are unchanged."
+    "ucp": "Adapter 1.0.0 implements UCP 2026-08-25 catalog search, lookup and permalink. The deployed service accepts the pinned Playground platform. Buyers complete purchases through the existing website."
   },
-  "skill_sha256": "c6bd1d797e398fcd1daca7b2ea87bd30ca8df9eea7b784f73748fd4bcfd9020a",
+  "skill_sha256": "d64ccae05e12bb42e8670aad43c915274398e5531a8a484e37f66f3bcc818873",
   "ucp": {
     "protocol": "2026-08-25",
     "profile": "/.well-known/ucp",

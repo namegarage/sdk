@@ -1,6 +1,6 @@
 # @namegarage/sdk
 
-Upcoming 0.3.0 source candidate. The registry installation below applies after publication; local archive tests do not establish npm availability.
+Version 0.3.0 adds typed UCP catalog discovery, reads and purchase-link construction.
 
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
@@ -28,7 +28,7 @@ for (const domain of matches.results) {
 }
 ```
 
-No account, API key, bearer token or browser cookie is required. Requests omit credentials. Existing catalog methods make GET requests. UCP helpers discover the advertised service and make POST catalog reads, with an exact reviewed platform profile. They cannot start checkout or authorize a purchase.
+The existing anonymous HTTP methods need no account, API key, bearer token or browser cookie. Requests omit browser credentials and make GET requests. UCP helpers discover the advertised service and make POST catalog reads, with an exact reviewed platform profile and a fresh RFC 9421 ES256 signature from its pinned key. Supply a custom `fetch` transport that signs the method, target and exact request body using the approved platform key. They cannot start checkout or authorize a purchase.
 
 Search options are `maxPrice` (positive whole USD), `tier` (`Platinum`, `Gold`, `Silver`, `Bronze`, `Bargain`), `tld` (such as `com` or `co.uk`), `maxLength` (1–63), and `limit` (1–50). Responses retain the API's field names.
 
@@ -135,30 +135,32 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.0`.
 
-The source `release.json` tracks the upcoming `2026-11-03-static-browsing` candidate. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata and remain unchanged. Version 0.3.0 is a new unpublished candidate.
+The bundled `release.json` records `2026-11-10-ucp-catalog`. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata.
 
-The earlier `2026-10-28-blog-newsletter` record and its evidence remain independently pending in the [central changelog](https://namegarage.com/developers/changelog/). This UCP source update does not complete its outstanding publication acceptance.
+Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 
 ## UCP catalog and buyer handoff
 
-UCP protocol 2026-08-25 is available only when Namegarage advertises its profile. Production activation and real-platform acceptance are separate from this source candidate. Use existing HTTP/MCP reads when the profile is unavailable.
+Namegarage advertises UCP protocol 2026-08-25 in its production business profile. Catalog POST reads currently accept only the configured signed Playground platform. Other callers can use the existing anonymous HTTP, MCP or A2A interfaces.
 
 ```ts
-const profile = await client.getUcpProfile();
+// signingFetch is supplied by the configured platform and signs each POST.
+const ucpClient = new Namegarage({fetch: signingFetch});
+const profile = await ucpClient.getUcpProfile();
 const options = {platformProfile: 'https://your-platform.example/.well-known/ucp'};
-const found = await client.searchUcpCatalog({query: 'meal planning', pagination: {limit: 10}}, options);
+const found = await ucpClient.searchUcpCatalog({query: 'meal planning', pagination: {limit: 10}}, options);
 if (found.products[0]) {
-  const detail = await client.getUcpProduct({id: found.products[0].id}, options);
-  const browserUrl = client.createPurchaseLink(detail.product.id, profile);
+  const detail = await ucpClient.getUcpProduct({id: found.products[0].id}, options);
+  const browserUrl = ucpClient.createPurchaseLink(detail.product.id, profile);
   // Present browserUrl to the buyer. This helper makes no network request.
 }
-const batch = await client.lookupUcpCatalog({ids: ['example.invalid']}, options);
+const batch = await ucpClient.lookupUcpCatalog({ids: ['example.invalid']}, options);
 ```
 
-The platform URL must be reviewed and configured by Namegarage before catalog requests are accepted. Use the exact advertised platform profile URL; its path can differ from the merchant discovery path `/.well-known/ucp`. The SDK never fetches that URL itself. Each read discovers the business REST endpoint, verifies it stays on the documented same-origin catalog path, then sends the read request. No credentials or cookies are sent and redirects are refused.
+The platform URL must be reviewed and configured by Namegarage before catalog requests are accepted. Use the exact advertised platform profile URL; its path can differ from the merchant discovery path `/.well-known/ucp`. The SDK never fetches that URL itself. Each read discovers the business REST endpoint, verifies it stays on the documented same-origin catalog path, then sends the read request. Browser credentials and cookies are omitted and redirects are refused. The platform signing transport adds the fresh HTTP message signature to each catalog POST.
 
 Follow `pagination.has_next_page` and its opaque cursor. Pages are at most 20 products; lookup batches accept at most 20 IDs. Price filters and response prices use safe integer USD minor units. A changed price or availability returns `NamegarageApiError` with code `cursor_expired` and a recoverable message in `error.body`; restart the same search without a cursor. Malformed cursors or changed search inputs return `invalid_request`. The SDK does not retry automatically. Offer-only and held names are excluded. A result is not a reservation or a locked quote. Avoid personal and confidential query context.
 
 The buyer follows the purchase link, reviews the selected domain and current website terms, and completes checkout on Namegarage. A local link helper cannot create a cart, account, offer, reservation, order or payment. `NamegarageApiError` also reports UCP negotiation errors returned with HTTP 200; requests are never retried automatically.
 
-Catalog browsing uses the deployed snapshot and remains available during transaction-database outages. Use dynamic catalog operations for current prices and availability; a browsing snapshot never authorizes a purchase. Release `2026-11-03-static-browsing` changes the website only and retains the existing package version, exact compatibility pins and skill bytes. The earlier UCP candidate remains pending under its own activation and distribution gates.
+Catalog browsing uses the deployed snapshot and remains available during transaction-database outages. Use dynamic catalog operations for current prices and availability; a browsing snapshot never authorizes a purchase. Release `2026-11-10-ucp-catalog` includes that website reliability change and the SDK 0.3.0 UCP helpers.
