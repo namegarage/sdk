@@ -1,0 +1,43 @@
+CHANGELOG.md
+  s_28fba3d37cd081::t_af4961c94ca8b5 3-6
+README.md
+  s_28fba3d37cd081::t_f1cebdb2b8d29f 3,10,96,136,138,164
+aliases/namegarage-sdk/README.md
+  s_28fba3d37cd081::t_a5469e3a7d10ba 3,6-7,12
+aliases/namegarage-sdk/package-lock.json
+  s_28fba3d37cd081::t_fe3f007affdfb9 3,9,12,16-18
+aliases/namegarage-sdk/package.json
+  s_28fba3d37cd081::t_b337daba8a823d 3,29
+aliases/namegarage/README.md
+  s_28fba3d37cd081::t_816eb69dd7659e 3,6-7,12
+aliases/namegarage/package-lock.json
+  s_28fba3d37cd081::t_8c18e30f4fc7be 3,9,12,16-18
+aliases/namegarage/package.json
+  s_28fba3d37cd081::t_423bc0fddebcca 3,29
+package-lock.json
+  s_28fba3d37cd081::t_6ae02ccb41c95d 3,9
+package.json
+  s_28fba3d37cd081::t_ab3a86065f5620 3
+release.json
+  s_28fba3d37cd081::t_787f9cb40b67bf 2,6-7,10,39-45,47
+scripts/verify-aliases.mjs
+  s_28fba3d37cd081::t_804a9ad6284468 17,23,34,58
+scripts/verify-package.mjs
+  s_28fba3d37cd081::t_8aa42d3830f08d 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0cdcf2c5dd2c171d1a3f57b468f7818700f15f75",
+  "prompts": {},
+  "sessions": {
+    "s_28fba3d37cd081": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bbd2-885a-7f31-aa25-c266b5c17892",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
