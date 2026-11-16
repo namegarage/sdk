@@ -9,7 +9,7 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const npm=join(dirname(process.execPath),'npm');
 const packed=JSON.parse(execFileSync(npm,['pack','--json','--ignore-scripts'],{cwd:root,encoding:'utf8'}))[0];
 const names=packed.files.map(f=>f.path);
-for(const name of ['dist/index.js','dist/index.cjs','dist/index.d.ts','dist/index.d.cts','README.md','LICENSE'])assert.ok(names.includes(name),name);
+for(const name of ['dist/index.js','dist/index.cjs','dist/index.d.ts','dist/index.d.cts','README.md','LICENSE','release.json','CHANGELOG.md'])assert.ok(names.includes(name),name);
 assert.ok(names.every(n=>n.startsWith('dist/')||['README.md','LICENSE','package.json','CHANGELOG.md','release.json'].includes(n)),names);
 const consumer=await mkdtemp(join(tmpdir(),'namegarage-sdk-consumer-'));
 await writeFile(join(consumer,'package.json'),JSON.stringify({private:true,type:'module'}));

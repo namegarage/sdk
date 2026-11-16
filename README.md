@@ -93,7 +93,7 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned to the published `@namegarage/sdk@0.3.1`. New projects should use
+packages pinned exactly to `@namegarage/sdk@0.3.1`. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
