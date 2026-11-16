@@ -1,15 +1,15 @@
 # namegarage-sdk
 
-Version 0.3.0 forwards the canonical SDK, including its typed UCP helpers.
+Version 0.3.1 forwards the canonical SDK, including its typed UCP helpers.
 
 Compatibility package for the official [@namegarage/sdk](https://github.com/namegarage/sdk).
-Version 0.3.0 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
-only on `@namegarage/sdk@0.3.0`.
+Version 0.3.1 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
+only on `@namegarage/sdk@0.3.1`.
 
 For new projects, install the scoped package directly:
 
 ```bash
-npm install @namegarage/sdk@0.3.0
+npm install @namegarage/sdk@0.3.1
 ```
 
 The client reads Namegarage's anonymous public domain catalog and search API.

@@ -9,13 +9,13 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const npm=join(dirname(process.execPath),'npm');
 const packed=JSON.parse(execFileSync(npm,['pack','--json','--ignore-scripts'],{cwd:root,encoding:'utf8'}))[0];
 const names=packed.files.map(f=>f.path);
-for(const name of ['dist/index.js','dist/index.cjs','dist/index.d.ts','dist/index.d.cts','README.md','LICENSE'])assert.ok(names.includes(name),name);
+for(const name of ['dist/index.js','dist/index.cjs','dist/index.d.ts','dist/index.d.cts','README.md','LICENSE','release.json','CHANGELOG.md'])assert.ok(names.includes(name),name);
 assert.ok(names.every(n=>n.startsWith('dist/')||['README.md','LICENSE','package.json','CHANGELOG.md','release.json'].includes(n)),names);
 const consumer=await mkdtemp(join(tmpdir(),'namegarage-sdk-consumer-'));
 await writeFile(join(consumer,'package.json'),JSON.stringify({private:true,type:'module'}));
 execFileSync(npm,['install',join(root,packed.filename),'--ignore-scripts','--no-audit','--no-fund','--cache=/private/tmp/namegarage-sdk-npm-cache'],{cwd:consumer,stdio:'pipe'});
 const packageJson=JSON.parse(await readFile(join(consumer,'node_modules/@namegarage/sdk/package.json')));
-assert.equal(packageJson.version,'0.3.0');assert.equal(Object.keys(packageJson.dependencies||{}).length,0);
+assert.equal(packageJson.version,'0.3.1');assert.equal(Object.keys(packageJson.dependencies||{}).length,0);
 for(const ext of ['mts','cts']) {
  const source=`import { Namegarage, NamegarageApiError, type DomainResponse, type PurchaseDomain, type AlternativesResponse, type UcpBusinessProfile, type UcpSearchResponse, type SearchResponse } from '@namegarage/sdk';\nconst client = new Namegarage();\nconst pending: Promise<SearchResponse> = client.searchDomains('meal plan', {maxPrice: 5000, limit: 3});\nconst detail:Promise<DomainResponse>=client.getDomain('example.invalid');const payments:Promise<DomainResponse<PurchaseDomain>>=client.getPurchaseOptions('example.invalid');const alternatives:Promise<AlternativesResponse>=client.suggestAlternatives('example.invalid',{limit:3});const ucp:Promise<UcpSearchResponse>=client.searchUcpCatalog({query:'synthetic'},{platformProfile:'https://platform.example/.well-known/ucp'});const link=(profile:UcpBusinessProfile)=>client.createPurchaseLink('example.invalid',profile);void ucp;void link;void detail;void payments;void alternatives;void pending; void NamegarageApiError;\n`;
  await writeFile(join(consumer,`consumer.${ext}`),source);

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 — upcoming
+
+Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable.
+
 ## 0.3.0 — 2026-11-10
 
 Adds typed UCP discovery, catalog search, batch and product lookup, and a local-only browser handoff helper. Existing HTTP reads remain compatible. The buyer completes checkout on Namegarage. Use the custom fetch transport for signed UCP catalog requests. Both compatibility aliases pin SDK 0.3.0.

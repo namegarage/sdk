@@ -1,13 +1,13 @@
 # @namegarage/sdk
 
-Version 0.3.0 adds typed UCP catalog discovery, reads and purchase-link construction.
+Version 0.3.1 is an upcoming packaging patch. Public methods and types are unchanged.
 
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
 ## Install
 
 ```bash
-npm install @namegarage/sdk@0.3.0
+npm install @namegarage/sdk@0.3.1
 ```
 
 Use a runtime with native `fetch`, `AbortController`, `AbortSignal.any` and `DOMException`, such as Node.js 22 or later or a modern browser. You can supply your own `fetch` implementation.
@@ -93,7 +93,7 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned to the published `@namegarage/sdk@0.3.0`. New projects should use
+packages pinned exactly to `@namegarage/sdk@0.3.1`. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
@@ -133,9 +133,9 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 ## A2A compatibility and earlier release records
 
-Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.0`.
+Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.1`.
 
-The bundled `release.json` records the upcoming `2026-11-10-agreement-signing-sources` release: site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version. SDK 0.3.0 and its exact compatibility pins, published under `2026-11-10-ucp-catalog`, remain current. The previously published 0.2.0 npm archives and immutable v0.2.0 tag retain their original catalog-parity metadata.
+The bundled `release.json` records the upcoming `2026-11-11-bitcoin-direct-payment` release. SDK 0.3.1 and both compatibility packages carry updated coordination metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 archives retain their original bytes and UCP release metadata. Publication and anonymous registry acceptance are tracked in the central release record and issue #1449; the candidate install command above becomes available after publication.
 
 Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 

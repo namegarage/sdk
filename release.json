@@ -1,10 +1,10 @@
 {
-  "id": "2026-11-10-agreement-signing-sources",
+  "id": "2026-11-11-bitcoin-direct-payment",
   "components": {
     "api": "1.3.0",
     "mcp": "1.3.1",
-    "sdk": "0.3.0",
-    "skill": "1.3.0",
+    "sdk": "0.3.1",
+    "skill": "1.3.1",
     "a2a": "1.0.0",
     "website": "1.2.1",
     "ucp": "1.0.0"
@@ -36,15 +36,15 @@
     }
   ],
   "compatibility": {
-    "api": "API 1.3.0 adds read-only UCP catalog POST operations for a configured signing platform. Existing anonymous HTTP GET, MCP and A2A contracts retain their behavior. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "mcp": "MCP 1.3.1 retains its four anonymous read-only tools and schemas. UCP shares their catalog authority. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "sdk": "SDK 0.3.0 adds typed UCP discovery, search, lookup and purchase-link construction. UCP catalog requests use the caller's signing fetch transport. Both compatibility packages pin exactly 0.3.0. Existing anonymous HTTP methods retain their contracts. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "skill": "Skill 1.3.0 adds signed UCP catalog and human checkout guidance, preserving MIT-0 and anonymous HTTP/MCP/A2A fallbacks. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "a2a": "A2A 1.0.0 retains its stateless JSON-RPC direct-Message profile and isolated acceptance evidence. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "website": "Website 1.2.1 serves deployed price schedules and availability snapshots without request-time D1 reads. Purchase actions retain fresh D1 checks and fail closed. Activation, withdrawal and availability display changes require a guarded rebuild and deployment. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version.",
-    "ucp": "Adapter 1.0.0 implements UCP 2026-08-25 catalog search, lookup and permalink. The deployed service accepts the pinned Playground platform. Buyers complete purchases through the existing website. Site-internal source changes for agreement signing. No HTTP, MCP, SDK or skill contract changes; every component keeps its version."
+    "api": "API 1.3.0 keeps this component version: Bitcoin direct payment changes no public HTTP catalog route, schema or behavior. The buyer's /api/btc-invoice endpoint is not part of the public catalog API.",
+    "mcp": "MCP 1.3.1 keeps this component version: its four anonymous read-only tools and schemas are unchanged. The Bitcoin confirm, refund, push-check and release tools belong to the seller's local operator MCP server, not the public catalog MCP.",
+    "sdk": "SDK 0.3.1 is a packaging patch: public methods and types are unchanged, while the bundled release metadata now identifies the Bitcoin release. Both compatibility packages are 0.3.1 and pin exactly @namegarage/sdk 0.3.1. Published 0.3.0 archives remain immutable.",
+    "skill": "Skill 1.3.1 updates the exact SDK install pin to 0.3.1 and the coordinated release metadata. Public read-only guidance and the MIT-0 license remain unchanged; published 1.3.0 bytes remain immutable.",
+    "a2a": "A2A 1.0.0 keeps this component version: no transport, admission or skill change.",
+    "website": "Website 1.2.1 keeps its functional version: catalog files, snapshots and public read contracts retain their behavior. Agent install examples advance to verified SDK 0.3.1 only after coordinated publication. The direct-purchase panel offers Bitcoin and hides Gram payment details after payment, cancellation or an unreadable state; the buyer invoice endpoints are outside the public catalog API.",
+    "ucp": "Adapter 1.0.0 keeps this component version: UCP catalog search, lookup and permalinks are unchanged."
   },
-  "skill_sha256": "d64ccae05e12bb42e8670aad43c915274398e5531a8a484e37f66f3bcc818873",
+  "skill_sha256": "6251b956f0837a38f211ecb4035e23ed6dc7decc35aac1c048e300de68aacd4a",
   "ucp": {
     "protocol": "2026-08-25",
     "profile": "/.well-known/ucp",
