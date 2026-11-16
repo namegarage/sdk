@@ -1,13 +1,13 @@
 # @namegarage/sdk
 
-Version 0.3.1 is an upcoming packaging patch. Public methods and types are unchanged.
+Version 0.3.2 is an upcoming packaging patch. Public methods and types are unchanged.
 
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
 ## Install
 
 ```bash
-npm install @namegarage/sdk@0.3.1
+npm install @namegarage/sdk@0.3.2
 ```
 
 Use a runtime with native `fetch`, `AbortController`, `AbortSignal.any` and `DOMException`, such as Node.js 22 or later or a modern browser. You can supply your own `fetch` implementation.
@@ -93,7 +93,7 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned exactly to `@namegarage/sdk@0.3.1`. New projects should use
+packages pinned exactly to `@namegarage/sdk@0.3.2`. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
@@ -133,9 +133,9 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 ## A2A compatibility and earlier release records
 
-Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.1`.
+Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.2`.
 
-The bundled `release.json` records the upcoming `2026-11-11-bitcoin-direct-payment` release. SDK 0.3.1 and both compatibility packages carry updated coordination metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 archives retain their original bytes and UCP release metadata. Publication and anonymous registry acceptance are tracked in the central release record and issue #1449; the candidate install command above becomes available after publication.
+The bundled `release.json` records the upcoming `2026-11-16-ucp-exact-admission` release. SDK 0.3.2 and both compatibility packages carry updated coordination metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 and 0.3.1 archives retain their original bytes and release metadata. Publication, earlier pending release gates and anonymous registry acceptance are tracked in the central release record; the candidate install command above becomes available after publication.
 
 Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 
@@ -161,6 +161,6 @@ The platform URL must be reviewed and configured by Namegarage before catalog re
 
 Follow `pagination.has_next_page` and its opaque cursor. Pages are at most 20 products; lookup batches accept at most 20 IDs. Price filters and response prices use safe integer USD minor units. A changed price or availability returns `NamegarageApiError` with code `cursor_expired` and a recoverable message in `error.body`; restart the same search without a cursor. Malformed cursors or changed search inputs return `invalid_request`. The SDK does not retry automatically. Offer-only and held names are excluded. A result is not a reservation or a locked quote. Avoid personal and confidential query context.
 
-The buyer follows the purchase link, reviews the selected domain and current website terms, and completes checkout on Namegarage. A local link helper cannot create a cart, account, offer, reservation, order or payment. `NamegarageApiError` also reports UCP negotiation errors returned with HTTP 200; requests are never retried automatically.
+The buyer follows the purchase link, reviews the selected domain and current website terms, and completes checkout on Namegarage. A local link helper cannot create a cart, account, offer, reservation, order or payment. `NamegarageApiError` also reports UCP negotiation errors returned with HTTP 200; requests are never retried automatically. UCP 1.0.1 enforces fixed-window per-source rate allowances globally across edge locations (with buyer purchase links counted separately from agent catalog reads), so callers sharing a network source across locations can receive HTTP 429 with `Retry-After` earlier and should honor `error.retryAfterSeconds`.
 
 Catalog browsing uses the deployed snapshot and remains available during transaction-database outages. Use dynamic catalog operations for current prices and availability; a browsing snapshot never authorizes a purchase. Release `2026-11-10-ucp-catalog` includes that website reliability change and the SDK 0.3.0 UCP helpers.
