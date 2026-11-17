@@ -1,5 +1,5 @@
 {
-  "id": "2026-11-16-ucp-exact-admission",
+  "id": "2026-11-11-bitcoin-direct-payment",
   "components": {
     "api": "1.3.0",
     "mcp": "1.3.1",
@@ -7,7 +7,7 @@
     "skill": "1.3.2",
     "a2a": "1.0.0",
     "website": "1.2.1",
-    "ucp": "1.0.1"
+    "ucp": "1.0.0"
   },
   "capabilities": [
     {
@@ -36,15 +36,28 @@
     }
   ],
   "compatibility": {
-    "api": "API 1.3.0 keeps this component version: public HTTP catalog GET routes, parameters, schemas and anonymous rate limits are unchanged. UCP catalog POST routes retain their HTTP paths, request/response schemas and 2026-08-25 protocol contract while UCP component 1.0.1 makes per-source rate enforcement exact across edge locations.",
-    "mcp": "MCP 1.3.1 keeps this component version: its four anonymous read-only tools, schemas, Streamable HTTP transport and shared search/MCP quotas are unchanged.",
-    "sdk": "SDK 0.3.2 is an upcoming packaging patch: public methods, types and runtime behavior are unchanged, while bundled release metadata and install references advance to 2026-11-16-ucp-exact-admission. Both compatibility packages use 0.3.2 and pin @namegarage/sdk 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable. Shared-network UCP callers can receive HTTP 429 with Retry-After earlier under exact global per-source enforcement; NamegarageApiError already exposes status, retryAfter and retryAfterSeconds without automatic retries.",
-    "skill": "Skill 1.3.2 is an upcoming patch that updates the exact SDK install pin to 0.3.2 and coordinated release metadata. Public read-only catalog, A2A and UCP guidance and the MIT-0 license remain unchanged; published 1.3.0 and 1.3.1 skill artifacts remain immutable.",
-    "a2a": "A2A 1.0.0 keeps this component version: its stateless JSON-RPC 1.0 direct-Message profile, anonymous transport and shared search admission limits are unchanged.",
-    "website": "Website 1.2.1 keeps its component version: static catalog browsing, domain pages, checkout handoff and fresh transaction-database checks retain their contracts. Verified immutable catalog and promotion-document caches recheck completed plain data after SHA-256 verification without sharing pending request I/O or live D1 authority, and freeze validated objects once. Website install examples stay on published SDK 0.3.0 while 0.3.1 and 0.3.2 remain upcoming.",
-    "ucp": "Adapter 1.0.1 keeps UCP protocol 2026-08-25 routes, schemas, configured signing peer and numeric limits (7 agent requests and 30 buyer purchase-link requests per 60 seconds per normalized client IPv4 /32 or IPv6 /64 source, plus UCP's separate 120/minute catalog admission store), while replacing approximate per-location native rate counters with exact global per-source Durable Object enforcement. Buyer purchase-link budgets remain separate from agent catalog reads. Positive window counts persist durably across fixed windows without refunds, lost replies remain spent, no pending request I/O is shared, and unavailable limiter state fails closed with HTTP 503 and Retry-After. Clients sharing a network source across edge locations can receive HTTP 429 with Retry-After as soon as their combined global traffic reaches the configured limit."
+    "api": "API 1.3.0 keeps this component version: Bitcoin direct payment changes no public HTTP catalog route, schema or behavior. The buyer's /api/btc-invoice endpoint is not part of the public catalog API.",
+    "mcp": "MCP 1.3.1 keeps this component version: its four anonymous read-only tools and schemas are unchanged. The Bitcoin confirm, refund, push-check and release tools belong to the seller's local operator MCP server, not the public catalog MCP.",
+    "sdk": "SDK 0.3.2 is an upcoming packaging patch: public methods, types, dependencies and runtime behavior are unchanged, while the bundled release metadata identifies the installed 2026-11-11-bitcoin-direct-payment release with UCP adapter 1.0.0. Both compatibility packages use 0.3.2 and pin exactly @namegarage/sdk 0.3.2. Published 0.3.0 and 0.3.1 archives remain immutable.",
+    "skill": "Skill 1.3.2 is an upcoming patch that updates the exact SDK install pin to 0.3.2 and the coordinated release metadata for the installed Bitcoin release. Public read-only catalog, A2A and UCP guidance and the MIT-0 license remain unchanged; published 1.3.0 and 1.3.1 skill artifacts remain immutable.",
+    "a2a": "A2A 1.0.0 keeps this component version: no transport, admission or skill change.",
+    "website": "Website 1.2.1 keeps its functional version: catalog files, snapshots and public read contracts retain their behavior. Agent install examples advance to verified SDK 0.3.2 only after coordinated publication. The direct-purchase panel offers Bitcoin and hides Gram payment details after payment, cancellation or an unreadable state; the buyer invoice endpoints are outside the public catalog API.",
+    "ucp": "Adapter 1.0.0 keeps this component version: UCP catalog search, lookup and permalinks are unchanged."
   },
   "skill_sha256": "67a5ea33dda4a45d9744eae3097562578c82398cf3ad96478092774de94129f5",
+  "adapters": [
+    {
+      "id": "a2a",
+      "component": "a2a",
+      "endpoint": "/api/a2a",
+      "card": "/.well-known/agent-card.json",
+      "protocol": "1.0",
+      "skill": "select_domains",
+      "uses": [
+        "search_domains"
+      ]
+    }
+  ],
   "ucp": {
     "protocol": "2026-08-25",
     "profile": "/.well-known/ucp",
@@ -72,18 +85,5 @@
         "sdk": "getUcpProduct"
       }
     ]
-  },
-  "adapters": [
-    {
-      "id": "a2a",
-      "component": "a2a",
-      "endpoint": "/api/a2a",
-      "card": "/.well-known/agent-card.json",
-      "protocol": "1.0",
-      "skill": "select_domains",
-      "uses": [
-        "search_domains"
-      ]
-    }
-  ]
+  }
 }

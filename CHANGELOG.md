@@ -2,9 +2,9 @@
 
 ## 0.3.2 — upcoming
 
-Updates bundled coordination metadata for `2026-11-16-ucp-exact-admission` (UCP 1.0.1 exact global per-source rate enforcement). Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable.
+Updates bundled coordination metadata for the installed `2026-11-11-bitcoin-direct-payment` release (UCP adapter 1.0.0) and the current catalog skill text. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable.
 
-## 0.3.1 — upcoming
+## 0.3.1 — published
 
 Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable.
 
