@@ -2,11 +2,11 @@
 
 ## 0.3.2 — upcoming
 
-Updates bundled coordination metadata for the installed `2026-11-11-bitcoin-direct-payment` release (UCP adapter 1.0.0) and the current catalog skill text. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable.
+Package patch for the installed service under the distinct release ID `2026-11-17-installed-service-packaging`. Bundled metadata now records the installed component contract, including UCP adapter 1.0.0, and the exact current catalog skill and SDK pins. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable.
 
-## 0.3.1 — published
+## 0.3.1 — 2026-11-16 (npm publication)
 
-Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable.
+Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable. SDK 0.3.1 and both compatibility packages were published on npm; the coordinated release recorded in their metadata did not complete, and its remaining checks continue under 0.3.2.
 
 ## 0.3.0 — 2026-11-10
 
