@@ -1,6 +1,6 @@
 # @namegarage/sdk
 
-Version 0.3.2 is a package patch for the installed Namegarage service. It uses the distinct release ID `2026-11-17-installed-service-packaging` and serves the existing UCP adapter 1.0.0 contract. Public methods, types, dependencies and runtime behavior are unchanged. The [developer changelog](https://namegarage.com/developers/changelog/) records its current publication status.
+Version 0.3.3 is an upcoming package patch under release ID `2026-11-16-ucp-exact-admission`. Its bundled metadata records the reserved UCP adapter 1.0.1. Public methods, types, dependencies and runtime behavior are unchanged from 0.3.2. It is not published yet: version 0.3.2, from release `2026-11-17-installed-service-packaging`, remains the version to install. The [developer changelog](https://namegarage.com/developers/changelog/) records the current publication status.
 
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
@@ -9,6 +9,8 @@ TypeScript and JavaScript client for Namegarage's anonymous public domain catalo
 ```bash
 npm install @namegarage/sdk@0.3.2
 ```
+
+This is the latest published version. Install `@namegarage/sdk@0.3.3` only after the changelog shows release `2026-11-16-ucp-exact-admission` as published.
 
 Use a runtime with native `fetch`, `AbortController`, `AbortSignal.any` and `DOMException`, such as Node.js 22 or later or a modern browser. You can supply your own `fetch` implementation.
 
@@ -93,7 +95,8 @@ Release from a clean, reviewed, signed commit. Inspect the package archive, inst
 ## Compatibility package sources
 
 `aliases/namegarage` and `aliases/namegarage-sdk` contain thin compatibility
-packages pinned exactly to `@namegarage/sdk@0.3.2`. New projects should use
+packages pinned exactly to `@namegarage/sdk@0.3.3`. Their published 0.3.2
+versions pin `@namegarage/sdk@0.3.2` and remain installable. New projects should use
 the scoped package. Run `npm run test:aliases` to check their archives, clean
 consumer installs, both module/type entry points and browser bundles.
 
@@ -133,9 +136,9 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 ## A2A compatibility and earlier release records
 
-Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.2`.
+Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.3`.
 
-The bundled `release.json` records the `2026-11-17-installed-service-packaging` package release for the installed service, with UCP adapter 1.0.0. SDK 0.3.2 and both compatibility packages carry this distinct coordination ID and the installed-contract metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 and 0.3.1 archives retain their original bytes and release metadata. Current publication status, earlier release gates and anonymous registry acceptance are tracked in the central release record and the [developer changelog](https://namegarage.com/developers/changelog/).
+The bundled `release.json` records the upcoming `2026-11-16-ucp-exact-admission` release, which reserves UCP adapter 1.0.1. SDK 0.3.3 and both compatibility packages carry this coordination ID without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0, 0.3.1 and 0.3.2 archives retain their original bytes and release metadata; 0.3.2 records the installed service under `2026-11-17-installed-service-packaging`, with UCP adapter 1.0.0. Current publication status, earlier release gates and anonymous registry acceptance are tracked in the central release record and the [developer changelog](https://namegarage.com/developers/changelog/).
 
 Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 
