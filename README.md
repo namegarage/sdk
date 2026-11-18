@@ -1,6 +1,6 @@
 # @namegarage/sdk
 
-Version 0.3.2 is an upcoming package patch for the installed Namegarage service. It uses the distinct release ID `2026-11-17-installed-service-packaging` and serves the existing UCP adapter 1.0.0 contract. Public methods, types, dependencies and runtime behavior are unchanged.
+Version 0.3.2 is a package patch for the installed Namegarage service. It uses the distinct release ID `2026-11-17-installed-service-packaging` and serves the existing UCP adapter 1.0.0 contract. Public methods, types, dependencies and runtime behavior are unchanged. The [developer changelog](https://namegarage.com/developers/changelog/) records its current publication status.
 
 TypeScript and JavaScript client for Namegarage's anonymous public domain catalog and search APIs. The package has no runtime dependencies. It supports ESM and CommonJS in Node.js and can be bundled for browsers.
 
@@ -135,7 +135,7 @@ All methods support cancellation and the same timeout/refusal handling. The
 
 Namegarage's [A2A domain-selection concierge](https://namegarage.com/docs/a2a) is a separate anonymous adapter over the same public catalog. SDK 0.3.0 adds UCP catalog reads and local handoff links; it does not add an A2A transport or authentication. Both compatibility packages pin exactly `@namegarage/sdk@0.3.2`.
 
-The bundled `release.json` records the upcoming `2026-11-17-installed-service-packaging` package release for the installed service, with UCP adapter 1.0.0. SDK 0.3.2 and both compatibility packages carry this distinct coordination ID and the installed-contract metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 and 0.3.1 archives retain their original bytes and release metadata. Publication, earlier pending release gates and anonymous registry acceptance are tracked in the central release record; the candidate install command above becomes available after publication.
+The bundled `release.json` records the `2026-11-17-installed-service-packaging` package release for the installed service, with UCP adapter 1.0.0. SDK 0.3.2 and both compatibility packages carry this distinct coordination ID and the installed-contract metadata without changing public methods or types. Their changed archive bytes use new immutable patch versions. The published 0.3.0 and 0.3.1 archives retain their original bytes and release metadata. Current publication status, earlier release gates and anonymous registry acceptance are tracked in the central release record and the [developer changelog](https://namegarage.com/developers/changelog/).
 
 Earlier candidate records and their acceptance evidence remain in the [central changelog](https://namegarage.com/developers/changelog/). New artifact verification applies to this version; it does not rewrite earlier archives or tags.
 

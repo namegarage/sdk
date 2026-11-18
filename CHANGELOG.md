@@ -1,12 +1,12 @@
 # Changelog
 
-## 0.3.2 — upcoming
+## 0.3.2 — package metadata
 
-Package patch for the installed service under the distinct release ID `2026-11-17-installed-service-packaging`. Bundled metadata now records the installed component contract, including UCP adapter 1.0.0, and the exact current catalog skill and SDK pins. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable.
+Package patch for the installed service under the distinct release ID `2026-11-17-installed-service-packaging`. Bundled metadata now records the installed component contract, including UCP adapter 1.0.0, and the exact current catalog skill and SDK pins. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable. The [developer changelog](https://namegarage.com/developers/changelog/) records its publication status.
 
 ## 0.3.1 — 2026-11-16 (npm publication)
 
-Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable. SDK 0.3.1 and both compatibility packages were published on npm; the coordinated release recorded in their metadata did not complete, and its remaining checks continue under 0.3.2.
+Updates bundled coordination metadata for the Bitcoin release. Public methods, types and runtime code are unchanged. Both compatibility packages use 0.3.1 and pin SDK 0.3.1 exactly. Published 0.3.0 archives remain immutable. SDK 0.3.1 and both compatibility packages were published on npm; the coordinated release recorded in their metadata did not complete and was superseded. Its remaining checks continue under the successor release `2026-11-17-installed-service-packaging`.
 
 ## 0.3.0 — 2026-11-10
 
