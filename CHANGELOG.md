@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 — upcoming package metadata
+
+Upcoming package patch under release ID `2026-11-16-ucp-exact-admission`. Bundled metadata records the reserved UCP adapter 1.0.1 and the exact catalog skill 1.3.3 and SDK 0.3.3 pins. Public methods, types, dependencies and runtime code are unchanged from 0.3.2. Both compatibility packages use 0.3.3 and pin SDK 0.3.3 exactly. This version is not published; SDK 0.3.2 remains the installable version. Published 0.3.0, 0.3.1 and 0.3.2 archives remain immutable. The [developer changelog](https://namegarage.com/developers/changelog/) records its publication status.
+
 ## 0.3.2 — package metadata
 
 Package patch for the installed service under the distinct release ID `2026-11-17-installed-service-packaging`. Bundled metadata now records the installed component contract, including UCP adapter 1.0.0, and the exact current catalog skill and SDK pins. Public methods, types, dependencies and runtime code are unchanged. Both compatibility packages use 0.3.2 and pin SDK 0.3.2 exactly. Published 0.3.0 and 0.3.1 archives remain immutable. The [developer changelog](https://namegarage.com/developers/changelog/) records its publication status.

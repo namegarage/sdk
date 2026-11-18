@@ -1,16 +1,20 @@
 # namegarage
 
-Version 0.3.2 forwards the canonical SDK, including its typed UCP helpers.
+Version 0.3.3 forwards the canonical SDK, including its typed UCP helpers.
 
 Compatibility package for the official [@namegarage/sdk](https://github.com/namegarage/sdk).
-Version 0.3.2 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
-only on `@namegarage/sdk@0.3.2`.
+Version 0.3.3 forwards that SDK's ESM, CommonJS and TypeScript exports and depends
+only on `@namegarage/sdk@0.3.3`. Published version 0.3.2 depends only on
+`@namegarage/sdk@0.3.2`.
 
 For new projects, install the scoped package directly:
 
 ```bash
 npm install @namegarage/sdk@0.3.2
 ```
+
+Use `@namegarage/sdk@0.3.3` only after the [developer changelog](https://namegarage.com/developers/changelog/)
+shows release `2026-11-16-ucp-exact-admission` as published.
 
 The client reads Namegarage's anonymous public domain catalog and search API.
 Those HTTP reads need no account or API key. UCP catalog POST reads require the configured platform profile and a fresh ES256 HTTP message signature through a custom signing fetch transport. A null price means offer-only. It cannot buy or
