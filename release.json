@@ -1,12 +1,12 @@
 {
-  "id": "2026-11-21-canonical-link-headers",
+  "id": "2026-11-21-disclosed-sales-totals",
   "components": {
     "api": "1.3.0",
     "mcp": "1.3.1",
     "sdk": "0.3.2",
     "skill": "1.3.2",
     "a2a": "1.0.0",
-    "website": "1.7.1",
+    "website": "1.8.0",
     "ucp": "1.0.0",
     "utcp": "1.0.0"
   },
@@ -39,10 +39,10 @@
   "compatibility": {
     "api": "HTTP API 1.3.0 keeps its catalog routes, parameters, responses, and rate limits.",
     "mcp": "MCP 1.3.1 keeps the four public read-only tools and their argument and result schemas.",
-    "sdk": "SDK 0.3.2 and both aliases keep their published packages and exact pins. These document headers do not affect their catalog requests.",
+    "sdk": "SDK 0.3.2 and both aliases keep their published packages and exact pins. The sales page uses the existing catalog interfaces.",
     "skill": "Catalog skill 1.3.2 keeps its published bytes and SDK install commands.",
     "a2a": "A2A 1.0.0 keeps its selection skill, discovery, and endpoint.",
-    "website": "Website 1.7.1 corrects canonical Link headers on the homepage and blog Markdown for internationalized sales hostnames.",
+    "website": "Website 1.8.0 adds sale totals and historical venue labels to the public sales record.",
     "ucp": "UCP 1.0.0 retains the installed signed peer, catalog operations, and admission settings.",
     "utcp": "UTCP manual 1.0.0 keeps its published document and four read-only call templates."
   },
