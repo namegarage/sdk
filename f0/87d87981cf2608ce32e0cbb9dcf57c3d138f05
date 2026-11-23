@@ -1,0 +1,19 @@
+release.json
+  s_73e0aa0bbf2b88::t_7b2ad9a02dacde 2,10,42,45-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f087d87981cf2608ce32e0cbb9dcf57c3d138f05",
+  "prompts": {},
+  "sessions": {
+    "s_73e0aa0bbf2b88": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a2021e-7999-7f81-b9a0-bdad5b8a2495",
+        "model": "gpt-6.2-astra"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
