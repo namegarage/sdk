@@ -1,5 +1,5 @@
 {
-  "id": "2026-11-22-holiday-price-comparison",
+  "id": "2026-11-22-ucp-capacity-tooling",
   "components": {
     "api": "1.3.0",
     "mcp": "1.3.1",
@@ -7,7 +7,7 @@
     "skill": "1.3.2",
     "a2a": "1.0.0",
     "website": "1.8.6",
-    "ucp": "1.0.0",
+    "ucp": "1.0.1",
     "utcp": "1.0.0"
   },
   "capabilities": [
@@ -39,11 +39,11 @@
   "compatibility": {
     "api": "HTTP API 1.3.0 keeps the public routes, fields, and admission limits.",
     "mcp": "MCP 1.3.1 keeps the four public read-only tools and their schemas.",
-    "sdk": "SDK 0.3.2 and both compatibility aliases retain their published packages and exact pins. Their catalog requests do not read page JSON-LD.",
+    "sdk": "SDK 0.3.2 and its two compatibility packages keep their exact pins. The UCP methods use the same request and response formats.",
     "skill": "Catalog skill 1.3.2 retains its published bytes and existing install command.",
     "a2a": "A2A 1.0.0 retains its selection skill, discovery, and endpoint.",
-    "website": "Website 1.8.6 updates sale-price presentation without changing checkout pricing or catalog responses.",
-    "ucp": "UCP 1.0.0 retains the installed signed peer, catalog operations, and admission settings.",
+    "website": "Website 1.8.6 keeps the same catalog and checkout experience.",
+    "ucp": "UCP 1.0.1 updates capacity maintenance tooling. The published protocol, signed peer, catalog operations and admission limits stay compatible.",
     "utcp": "UTCP manual 1.0.0 retains its published document and four read-only call templates."
   },
   "skill_sha256": "67a5ea33dda4a45d9744eae3097562578c82398cf3ad96478092774de94129f5",
