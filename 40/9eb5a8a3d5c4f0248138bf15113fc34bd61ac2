@@ -1,0 +1,19 @@
+release.json
+  s_160e690ec71126::t_c3f4816837c2b8 2,9-10,42,45-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "409eb5a8a3d5c4f0248138bf15113fc34bd61ac2",
+  "prompts": {},
+  "sessions": {
+    "s_160e690ec71126": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4b26e55-8805-4aa5-98d5-0bb6cf2e3e3b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Nikolay Kolev <nikolay@users.noreply.github.com>"
+    }
+  }
+}
