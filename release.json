@@ -42,7 +42,7 @@
     "sdk": "SDK 0.3.2 and both compatibility aliases retain their published packages and exact pins. Their catalog requests do not read page JSON-LD.",
     "skill": "Catalog skill 1.3.2 retains its published bytes and existing install command.",
     "a2a": "A2A 1.0.0 retains its selection skill, discovery, and endpoint.",
-    "website": "Website 1.8.11 adds the sale price's start, end and list price to a domain's Product offer while a sitewide sale lowers that price. Catalog responses and checkout pricing are unchanged.",
+    "website": "Website 1.8.11 adds the sale price's start, end and list price to a domain's Product offer while a sitewide sale lowers that price, describes make-offer domains as Products without an offer, and describes the API reference as a TechArticle about the public WebAPI. Catalog responses, the OpenAPI document and checkout pricing are unchanged.",
     "ucp": "UCP 1.0.0 retains the installed signed peer, catalog operations, and admission settings.",
     "utcp": "UTCP manual 1.0.0 retains its published document and four read-only call templates."
   },
